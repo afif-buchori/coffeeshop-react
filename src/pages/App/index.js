@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import logo from '../../assets/logo.svg';
+// import '../../styles/index.css';
 import './App.css';
 
 import withNavigate from "../../utils/wrapper/withNavigate";
