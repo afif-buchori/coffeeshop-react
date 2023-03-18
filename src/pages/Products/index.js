@@ -1,9 +1,35 @@
 import React, { Component, Fragment } from 'react';
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import CardProducts from './cardProducts';
 
 export class Products extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      data: [],
+    }
+  }
+
+  componentDidMount() { 
+    const url = "http://localhost:8080/products";
+    fetch(url)
+    .then((res) => {
+      if(!res.ok) throw res.status;
+      return res.json();
+    })
+    .then((db) => {
+      this.setState({
+        data: db.data,
+      })
+    })
+    .catch((err) => console.log(err.message));
+  }
+
   render() {
+    // console.log(this.state.data);
+
     return (
       <Fragment>
         <Header activeLink="products" />
@@ -20,18 +46,10 @@ export class Products extends Component {
       </div>
       <div className="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-[90px] pt-20 px-[5%] sm:px-[10%] md:px-0">
 
-        <div className="w-40 h-52 p-4 pt-0 rounded-3xl shadow-lg relative flex flex-col justify-end items-center">
-          <div className="w-32 h-32 top-[-55px] absolute rounded-full overflow-hidden">
-            <img src="../img/product/veggie-tomato.png.webp" alt="" className="w-full h-auto -translate-y-6" />
-          </div>
-          <h2 className="font-black text-xl text-center mb-1">Veggie tomato mixed</h2>
-          <h3 className="font-bold text-lg text-secondary">IDR 34.000</h3>
-        </div>
-        
-        
-        
-        
-        
+        {this.state.data.map(product => (
+          <CardProducts key={product.id} image={product.image} prodName={product.prod_name} price={product.price} />
+        ))}
+
       </div>
     </div>
 

@@ -6,10 +6,35 @@ import logoGoogle from "../../assets/icon/icon-google.svg";
 import { Link } from 'react-router-dom';
 
 export class Login extends Component {
+
   constructor(props) {
     super();
+    this.state = {
+      email: "",
+      password: "",
+    };
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     console.log(props);
   }
+
+  handleEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const inputEmail = this.state.email;
+    const inputPassword = this.state.password;
+    console.log(inputEmail, inputPassword);
+  }
+
+
   render() {
     return (
       <Fragment>
@@ -28,14 +53,14 @@ export class Login extends Component {
         <Link to="/signup" className="btn w-28 md:w-36 h-11 bg-primary text-secondary rounded-3xl shadow shadow-2xl shadow-primary">Sign Up</Link>
       </div>
       {/* <!-- FORM --> */}
-      <form action="" className="flex flex-col px-[10%] md:px-0 md:ml-[10%] md:mt-[10%] md:ml-[10%] mb-[26%]">
+      <form action="" onSubmit={this.handleSubmit} className="flex flex-col px-[10%] md:px-0 md:ml-[10%] md:mt-[10%] md:ml-[10%] mb-[26%]">
         <h1 className="font-bold text-2xl md:text-4xl text-secondary my-6 md:mt-0 md:mb-14 text-center">Login</h1>
         <label htmlFor="email" className="font-bold text-xl mb-3">Email Address :</label>
-        <input type="text" id="email" value="" placeholder="Enter your email address" className="input-auth mb-8" />
+        <input type="text" id="email" value={this.state.email} onChange={this.handleEmailChange} placeholder="Enter your email address" className="input-auth mb-8" />
         <label htmlFor="password" className="font-bold text-xl mb-3">Password :</label>
-        <input type="password" id="password" value="" placeholder="Enter your password" className="input-auth mb-5" />
+        <input type="password" id="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Enter your password" className="input-auth mb-5" />
         <a href="" className="mb-14 font-bold text-xl text-secondary">Forgot Password?</a>
-        <button className="btn h-14 md:h-[75px] text-xl text-secondary bg-primary rounded-2xl shadow-md shadow-primary mb-7">Login</button>
+        <button type="submit" className="btn h-14 md:h-[75px] text-xl text-secondary bg-primary rounded-2xl shadow-md shadow-primary mb-7">Login</button>
         <a href="" className="btn h-14 md:h-[75px] text-xl bg-white rounded-2xl shadow-2xl gap-3"><img src={logoGoogle} alt="" className="w-6 md:w-7" /> Login with Google</a>
       </form>
     </div>

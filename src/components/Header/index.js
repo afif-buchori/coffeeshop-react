@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Authentication from "./authentication";
-// import Account from "./account";
+import Account from "./account";
 
 import logoBrand from "../../assets/icon/logo.svg";
 
@@ -12,7 +12,7 @@ export class Header extends Component {
     console.log(props);
   }
   render() {
-    // const login = false;
+    const login = false;
     return (
 
   <header className="w-full fixed h-14 md:h-28 flex items-center justify-center shadow-lg bg-white z-50">
@@ -29,8 +29,12 @@ export class Header extends Component {
         <Link to="/history" className={this.props.activeLink === "history" ? "navlink nav-active" : "navlink"}>History</Link>
       </div>
       <div className="account hidden md:flex items-center gap-10 ml-auto">
-        <Authentication />
+
+        { login ? <Account /> : <Authentication /> }
+
+        {/* <Authentication /> */}
         {/* <Account /> */}
+
       </div>
       <div className="flex">
         <img src="./img/icon/toggle-menu.svg" alt="" className="w-10 md:hidden"/>
