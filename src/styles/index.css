@@ -75,10 +75,10 @@ code {
     @apply hidden;
   }
   .choose-size {
-    @apply flex relative w-[70px] h-[70px] rounded-full bg-primary font-bold text-3xl;
+    @apply flex relative w-14 h-14 md:w-[70px] md:h-[70px] rounded-full bg-primary font-bold text-xl md:text-3xl;
   }
   .choose-size span {
-    @apply absolute w-[70px] h-[70px] rounded-full border-8 border-secondary top-0 left-0;
+    @apply absolute w-14 h-14 md:w-[70px] md:h-[70px] rounded-full border-8 border-secondary top-0 left-0;
     transform: scale(0);
     transition: 0.15s linear;
   }
@@ -87,7 +87,7 @@ code {
   }
 
   .delivery-method {
-    @apply px-6 py-3 text-grey bg-[#ffffff60] border border-[#bababa60] rounded-xl relative overflow-hidden cursor-pointer;
+    @apply px-3 md:px-6 py-3 text-grey bg-[#ffffff60] border border-[#bababa60] rounded-xl relative overflow-hidden cursor-pointer text-xs md:text-base text-center;
   }
   .delivery-method span {
     @apply absolute w-full h-0 top-0 left-0 bg-secondary;
@@ -164,6 +164,11 @@ code {
     background-size: cover;
     background-position: center;
   }
+  .hero-forgot {
+    background-image: url(../assets/banner-forgot-pwd.jpeg.webp);
+    background-size: cover;
+    background-position: center;
+  }
 
   .card-fav > *:first-child {
     grid-row: span 2;
@@ -171,7 +176,7 @@ code {
     justify-self: center;
   }
   .card-fav ul {
-    /* list-style: url('../img/icon/checked.svg') inside; */
+    list-style: url(../assets/icon/checked.svg) inside;
   }
   .card-fav:hover {
     @apply border-secondary shadow-sm shadow-secondary;
@@ -206,28 +211,16 @@ code {
     @apply w-11 bg-secondary;
   }
   .page-arrow {
-    @apply flex w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-secondary transition-colors cursor-pointer;
+    @apply flex w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-secondary transition-colors cursor-pointer justify-center items-center text-secondary;
     transition-duration: 0.5s;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .page-arrow:first-child {
-    /* background-image: url('../img/icon/arrow-brown.svg'); */
-  }
-  .page-arrow:last-child {
-    /* background-image: url('../img/icon/arrow-brown.svg'); */
-    transform: scaleX(-1);
   }
   .page-arrow:hover {
-    @apply bg-secondary
+    @apply bg-secondary text-white;
   }
-  .page-arrow:first-child:hover {
-    /* background-image: url('../img/icon/arrow-white.svg'); */
-    transform: scaleX(-1);
-  }
-  .page-arrow:last-child:hover {
-    /* background-image: url('../img/icon/arrow-white.svg'); */
-    transform: scaleX(+1);
+
+  .qty-card > *:last-child {
+    grid-column: span 2;
+    justify-self: center;
   }
 
 }

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import iconSearch from "../../assets/icon/search.svg";
 import iconChat from "../../assets/icon/chat.svg";
+import profilePict from "../../assets/user.webp";
 import { Link } from 'react-router-dom';
 
 export class Account extends Component {
@@ -15,7 +16,7 @@ export class Account extends Component {
           <img src={iconChat} alt="" className="w-7" />
         </div>
         <Link to="/profile" className="w-8 h-8 rounded-full border overflow-hidden cursor-pointer">
-          <img src="../img/user.png.webp" alt="" />
+          <img src={profilePict} alt="" />
         </Link>
       </Fragment>
     )

@@ -14,7 +14,8 @@ export class Profile extends Component {
       <form action="">
         <div className="flex gap-8">
 
-          <div className="w-80 h-[380px] flex flex-col justify-between items-center rounded-2xl border overflow-hidden bg-white">
+          <div className="w-80 h-[380px] flex flex-col justify-between items-center rounded-2xl border overflow-hidden bg-white relative">
+            <button className="btn w-8 h-8 flex justify-center items-center rounded-full bg-secondary cursor-pointer absolute top-32 right-16"><i className="bi bi-pencil text-white"></i></button>
             <span className="w-32 h-32 rounded-full border-2 overflow-hidden mt-8">
               <img src="../img/user.png.webp" alt="profile-picture" />
             </span>
@@ -27,7 +28,7 @@ export class Profile extends Component {
           <div className="w-full flex flex-col justify-between rounded-2xl border overflow-hidden bg-white">
             <div className="flex justify-between items-center pl-8 pr-5 mt-4">
               <h2 className="font-bold text-2xl text-greydark">Contacts</h2>
-              <span className="btn w-12 h-12 flex justify-center items-center rounded-full bg-secondary cursor-pointer"></span>
+              <button className="btn w-12 h-12 flex justify-center items-center rounded-full bg-secondary cursor-pointer"><i className="bi bi-pencil text-xl text-white"></i></button>
             </div>
             <div className="grid grid-cols-2 gap-9 ml-8 mr-14">
               <div className="input flex flex-col">
@@ -51,7 +52,7 @@ export class Profile extends Component {
           <div className="w-full min-h-[420px] flex flex-col justify-between rounded-2xl border overflow-hidden bg-white">
             <div className="flex justify-between items-center pl-8 pr-5 mt-4">
               <h2 className="font-bold text-2xl text-greydark">Details</h2>
-              <span className="btn w-12 h-12 flex justify-center items-center rounded-full bg-secondary cursor-pointer"></span>
+              <button className="btn w-12 h-12 flex justify-center items-center rounded-full bg-secondary cursor-pointer"><i className="bi bi-pencil text-xl text-white"></i></button>
             </div>
             <div className="flex ml-8 mr-14 gap-9 w-fulll">
               <div className="flex flex-1 gap-9 flex-col">

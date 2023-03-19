@@ -14,21 +14,21 @@ export class ProductDetails extends Component {
         <li>Favorite & Promo</li>
         <li className="font-bold text-secondary"><i className="bi bi-caret-right-fill"></i>Cold Brew</li>
       </ul>
-      <div className="flex w-full mb-44 md:gap-16 xl:gap-20  justify-center">
+      <div className="flex flex-col md:flex-row w-full mb-60 md:mb-44 md:gap-16 xl:gap-20 justify-center">
         <div className="flex flex-col items-center">
-          <div className="w-[400px] h-[400px] rounded-full border overflow-hidden mt-24 mb-10">
+          <div className="w-60 h-60 md:w-[400px] md:h-[400px] rounded-full border overflow-hidden mt-10 md:mt-24 mb-4 md:mb-10">
             <img src="../img/product/cold-brew.png.webp" alt="display-product" className="product-img" />
           </div>
-          <h1 className="font-black text-6xl text-center mb-5">Cold Brew</h1>
-          <p className="font-medium text-4xl mb-8">IDR 30.000</p>
+          <h1 className="font-black text-4xl md:text-6xl text-center md:mb-5">Cold Brew</h1>
+          <p className="font-medium text-2xl md:text-4xl mb-8">IDR 30.000</p>
           <button className="btn text-2xl text-white bg-secondary w-full h-20 rounded-2xl mb-6">Add to Cart</button>
           <button className="btn text-2xl text-secondary bg-primary w-full h-20 rounded-2xl">Ask a Staff</button>
         </div>
-        <div className="flex flex-col items-center max-w-3xl">
-          <div className="flex flex-col rounded-2xl p-20 bg-white">
-            <p className="text-secondary text-2xl">Delivery only on <span className="font-bold">Monday to Friday</span> at <span className="font-bold">1 - 7 pm</span></p>
-            <p className="text-secondary text-2xl">Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeted for as long 48 hours.</p>
-            <h3 className="text-2xl font-bold text-center mt-16 mb-10">Choose a size</h3>
+        <div className="flex flex-col mt-8 md:mt-0 items-center max-w-3xl">
+          <div className="flex flex-col rounded-2xl p-5 md:p-20 bg-white">
+            <p className="text-secondary md:text-2xl">Delivery only on <span className="font-bold">Monday to Friday</span> at <span className="font-bold">1 - 7 pm</span></p>
+            <p className="text-secondary md:text-2xl">Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeted for as long 48 hours.</p>
+            <h3 className="text-2xl font-bold text-center mt-9 md:mt-16 mb-4 md:mb-10">Choose a size</h3>
             <div className="self-center flex w-full justify-evenly">
               <label htmlFor="r" className="choose-size btn">
                 <input type="radio" name="size" id="r" />
@@ -65,33 +65,33 @@ export class ProductDetails extends Component {
               <h5>Pick up</h5>
             </label>
           </div>
-          <div className="mt-10 flex gap-3">
-            <label htmlFor="time" className="text-xl">Set time :</label>
-            <input type="text" id="time" placeholder="Enter the time you'll arrived" className="bg-transparent text border-b-2 border-secondary py-1 px-1" />
+          <div className="mt-10 flex w-full justify-center items-center gap-3">
+            <label htmlFor="time" className="md:text-xl">Set time :</label>
+            <input type="text" id="time" placeholder="Enter the time you'll arrived" className="w-56 bg-transparent text border-b-2 border-secondary py-1 px-1" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section className="relative top-[-64px] w-full flex justify-center">
-    <div className="absolute w-4/5 max-width h-32 gap-10 flex">
-      <div className="w-full flex items-center rounded-2xl bg-white px-11 py-8 gap-4">
+  <section className="relative top-[-200px] md:top-[-64px] w-full flex justify-center">
+    <div className="absolute w-4/5 max-width md:h-32 gap-5 md:gap-10 flex flex-col md:flex-row">
+      <div className="qty-card w-full grid grid-cols-2 justify-items-center md:flex items-center rounded-2xl bg-white p-5 md:px-11 md:py-8 gap-4">
         <div className="w-24 h-24 rounded-full border overflow-hidden">
           img
         </div>
         <div className="flex flex-col mr-auto">
-          <h5 className="font-bold text-2xl">COLD BREW</h5>
-          <p>x1 (Large)</p>
-          <p>x1 (Large)</p>
+          <h5 className="font-bold text-base md:text-2xl">COLD BREW</h5>
+          <p className="text-xs md:text-base">x1 (Large)</p>
+          <p className="text-xs md:text-base">x1 (Large)</p>
         </div>
-        <div className="flex gap-8">
+        <div className="flex items-center gap-8">
           <button className="btn w-10 h-10 rounded-full bg-primary"><i className="bi bi-dash text-3xl"></i></button>
-          <h5 className="font-bold text-4xl">2</h5>
+          <h5 className="font-bold text-2xl md:text-4xl">2</h5>
           <button className="btn w-10 h-10 rounded-full bg-primary"><i className="bi bi-plus text-3xl"></i></button>
         </div>
       </div>
-    <button className="btn w-80 rounded-2xl bg-primary">CHECKOUT</button>
+    <button className="btn md:w-80 h-20 md:h-auto rounded-2xl bg-primary">CHECKOUT</button>
     </div>
   </section>
 

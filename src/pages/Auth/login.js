@@ -4,10 +4,11 @@ import Footer from "../../components/Footer";
 import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export class Login extends Component {
 
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       email: "",
@@ -16,22 +17,31 @@ export class Login extends Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log(props);
+    // console.log(props);
   }
 
-  handleEmailChange(event) {
+  handleEmailChange = (event) => {
     this.setState({ email: event.target.value });
   }
-  handlePasswordChange(event) {
+  handlePasswordChange = (event) => {
     this.setState({ password: event.target.value });
   }
+  // handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   this.setState( { [name]: value });
+  // }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
+    const { email, password } = this.state;
+    axios.post("http://localhost:8080/auth", { email, password })
+    .then((res) => { 
+      console.log(res.data);
+    })
+    .catch((err) => { console.log(err.message) });
 
-    const inputEmail = this.state.email;
-    const inputPassword = this.state.password;
-    console.log(inputEmail, inputPassword);
+    // console.log(this.state.email);
+    // console.log(this.state.password);
   }
 
 
@@ -59,7 +69,7 @@ export class Login extends Component {
         <input type="text" id="email" value={this.state.email} onChange={this.handleEmailChange} placeholder="Enter your email address" className="input-auth mb-8" />
         <label htmlFor="password" className="font-bold text-xl mb-3">Password :</label>
         <input type="password" id="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Enter your password" className="input-auth mb-5" />
-        <a href="" className="mb-14 font-bold text-xl text-secondary">Forgot Password?</a>
+        <Link to="/forgotpwd" className="mb-14 font-bold text-xl text-secondary">Forgot Password?</Link>
         <button type="submit" className="btn h-14 md:h-[75px] text-xl text-secondary bg-primary rounded-2xl shadow-md shadow-primary mb-7">Login</button>
         <a href="" className="btn h-14 md:h-[75px] text-xl bg-white rounded-2xl shadow-2xl gap-3"><img src={logoGoogle} alt="" className="w-6 md:w-7" /> Login with Google</a>
       </form>

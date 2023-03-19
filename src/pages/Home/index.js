@@ -4,6 +4,13 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 
 import logoSearch from "../../assets/icon/search.svg";
+import imgTeamWork from "../../assets/team-work.webp";
+import imgMaps from "../../assets/maps.svg";
+import imgNetflix from "../../assets/partner/netflix.webp";
+import imgReddit from "../../assets/partner/reddit.webp";
+import imgAmazon from "../../assets/partner/amazon.webp";
+import imgDiscord from "../../assets/partner/discord.webp";
+import imgSpotify from "../../assets/partner/spotify.webp";
 
 export class Home extends Component {
   render() {
@@ -60,7 +67,7 @@ export class Home extends Component {
   {/* <!-- WORK CONTENT --> */}
   <section className="flex flex-col items-center w-4/5 max-width my-8 md:my-24">
     <div className="flex flex-col md:flex-row w-full md:gap-[10%]">
-      <img src="./img/team-work.jpeg.webp" alt="" className="md:w-1/2 h-fit" />
+      <img src={imgTeamWork} alt="" className="md:w-1/2 h-fit" />
       <div className="flex flex-col md:w-1/2 justify-center">
         <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">We Provide Good Coffee and Healthy Meals</h3>
         <p className="text-sm md:text-base leading-6 md:leading-7 my-4 md:my-6">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
@@ -136,26 +143,26 @@ export class Home extends Component {
       {/* <!-- STORE LOCATION CONTENT --> */}
       <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">Visit Our Store in the Spot on the Map Below</h3>
       <p className="text-greydark text-sm md:text-base leading-6 md:leading-7 my-4 md:my-6">See our store in every city on the spot and spen your good day there. See you soon!</p>
-      <img src="./img/maps.svg" alt="" />
+      <img src={imgMaps} alt="" />
       {/* <!-- [END] STORE LOCATION CONTENT --> */}
 
       {/* <!-- PARTNER CONTENT --> */}
       <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">Our Partner</h3>
       <div className="w-full flex flex-col md:flex-row sm:grid sm:grid-cols-2 md:flex justify-center justify-items-center items-center mb-12">
         <div className="our-partner-img w-48">
-          <img src="./img/partner/netflix.png.webp" alt="" className="w-full" />
+          <img src={imgNetflix} alt="" className="w-full" />
         </div>
         <div className="our-partner-img w-48">
-          <img src="./img/partner/reddit.png.webp" alt="" className="w-full" />
+          <img src={imgReddit} alt="" className="w-full" />
         </div>
         <div className="our-partner-img w-48">
-          <img src="./img/partner/amazon.png.webp" alt="" className="w-full" />
+          <img src={imgAmazon} alt="" className="w-full" />
         </div>
         <div className="our-partner-img w-48">
-          <img src="./img/partner/discord.png.webp" alt="" className="w-full" />
+          <img src={imgDiscord} alt="" className="w-full" />
         </div>
         <div className="our-partner-img w-48">
-          <img src="./img/partner/spotify.png.webp" alt="" className="w-full" />
+          <img src={imgSpotify} alt="" className="w-full" />
         </div>
       </div>
       {/* <!-- [END] PARTNER CONTENT --> */}
@@ -177,7 +184,7 @@ export class Home extends Component {
             </div>
             <div className="ml-auto flex gap-2 items-center">
               <p className="font-medium">4.5</p>
-              <img src="./img/icon/Star.svg" alt="" className="w-4" />
+              <i className="bi bi-star-fill text-primary"></i>
             </div>
           </div>
           <p className="text-xs md:text-base">“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!</p>
@@ -194,7 +201,7 @@ export class Home extends Component {
             </div>
             <div className="ml-auto flex gap-2 items-center">
               <p className="font-medium">4.5</p>
-              <img src="./img/icon/Star.svg" alt="" className="w-4" />
+              <i className="bi bi-star-fill text-primary"></i>
             </div>
           </div>
           <p className="text-xs md:text-base">“I like it because I like to travel far and still can make my day better just by drinking their Hazelnut Latte</p>
@@ -211,7 +218,7 @@ export class Home extends Component {
             </div>
             <div className="ml-auto flex gap-2 items-center">
               <p className="font-medium">4.5</p>
-              <img src="./img/icon/Star.svg" alt="" className="w-4" />
+              <i className="bi bi-star-fill text-primary"></i>
             </div>
           </div>
           <p className="text-xs md:text-base">“This is very unusual for my taste, I haven’t liked coffee before but their coffee is the best! and yup, you have to order the chicken wings, the best in town!</p>
@@ -226,8 +233,8 @@ export class Home extends Component {
           <span className="page-dot"></span>
         </div>
         <div className="flex gap-4 ml-auto">
-          <span className="page-arrow"></span>
-          <span className="page-arrow"></span>
+          <span className="page-arrow"><i className="bi bi-arrow-left-short text-5xl"></i></span>
+          <span className="page-arrow"><i className="bi bi-arrow-right-short text-5xl"></i></span>
         </div>
       </div>
       {/* <!-- [END] COMENTARY CUSTOMER CONTENT --> */}
