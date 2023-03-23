@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 // import App from "./pages/App";
 import Home from "./pages/Home";
+import Auth from "./pages/Auth";
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import Login from "./pages/Auth/login";
@@ -15,6 +16,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 const router = createBrowserRouter([
     // { path: "/", element: <App name="Afif" age={20} href={"https://reactjs.org"} /> },
     { path: "/", element: <Home /> },
+    { path: "/auth", element : <Auth />},
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <Signup /> },
     { path: "/products", element: <Products /> },

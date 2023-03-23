@@ -7,7 +7,7 @@ export class index extends Component {
   render() {
     return (
       <Fragment>
-        <Header activeLink="history" />
+        <Header title="history" />
           <main className="hero-history w-full h-auto flex justify-center mt-14 md:mt-28">
             <div className="w-4/5 md:w-[90%] max-width flex flex-col items-center">
               <h1 className="font-bold text-4xl text-center text-white">Let’s see what you have bought!</h1>

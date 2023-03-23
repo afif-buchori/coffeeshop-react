@@ -7,7 +7,7 @@ export class YourCart extends Component {
   render() {
     return (
       <Fragment>
-        <Header activeLink="yourcart" />
+        <Header title="yourcart" />
 
         <main className="hero-transaction w-full h-auto flex justify-center mt-14 md:mt-28">
           <div className="w-full md:w-4/5 mx-[5%] md:mx-0 max-width mb-32 flex flex-col items-center">

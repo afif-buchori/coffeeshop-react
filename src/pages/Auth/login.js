@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from "../../components/Footer";
+import axios from 'axios';
 
 import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 export class Login extends Component {
 
@@ -34,11 +34,19 @@ export class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = this.state;
-    axios.post("http://localhost:8080/auth", { email, password })
+    // eslint-disable-next-line no-undef
+    axios.post(`${process.env.REACT_APP_SERVER_HOST}/auth`, { email, password })
     .then((res) => { 
       console.log(res.data);
     })
-    .catch((err) => { console.log(err.message) });
+    // .catch((err) => { console.log(err.message) });
+    .catch((err) => { 
+      console.log(err);
+      if(err.response.status === 401) {
+        alert(err.response.data.msg);
+      }
+      console.log(err.message) 
+    });
 
     // console.log(this.state.email);
     // console.log(this.state.password);
@@ -54,16 +62,16 @@ export class Login extends Component {
     {/* <!-- JUMBOTRON --> */}
     <div className="hero-auth w-full md:w-1/2 absolute md:static h-full md:h-auto -z-50"></div>
     {/* <!-- RIGHT CONTENT --> */}
-    <div className="z-1 w-full max-w-[720px] flex flex-col pt-3 md:pt-14 md:mr-[10%] bg-opacity-70 bg-white bg-opacity-5">
+    <div className="z-1 w-full max-w-[720px] flex flex-col pt-3 md:pt-14 md:mr-[10%] bg-white bg-opacity-70">
       <div className="flex px-[5%] md:pl-14">
         <div className="navbrand flex items-center mr-auto gap-4">
           <img src={logoBrand} alt="logo-brand" className="w-8" />
           <h1 className="text-2xl font-bold">Coffee Shop</h1>
         </div>
-        <Link to="/signup" className="btn w-28 md:w-36 h-11 bg-primary text-secondary rounded-3xl shadow shadow-2xl shadow-primary">Sign Up</Link>
+        <Link to="/signup" className="btn w-28 md:w-36 h-11 bg-primary text-secondary rounded-3xl shadow-2xl shadow-primary">Sign Up</Link>
       </div>
       {/* <!-- FORM --> */}
-      <form action="" onSubmit={this.handleSubmit} className="flex flex-col px-[10%] md:px-0 md:ml-[10%] md:mt-[10%] md:ml-[10%] mb-[26%]">
+      <form action="" onSubmit={this.handleSubmit} className="flex flex-col px-[10%] md:px-0 md:mt-[10%] md:ml-[10%] mb-[26%]">
         <h1 className="font-bold text-2xl md:text-4xl text-secondary my-6 md:mt-0 md:mb-14 text-center">Login</h1>
         <label htmlFor="email" className="font-bold text-xl mb-3">Email Address :</label>
         <input type="text" id="email" value={this.state.email} onChange={this.handleEmailChange} placeholder="Enter your email address" className="input-auth mb-8" />

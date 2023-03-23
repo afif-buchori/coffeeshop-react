@@ -13,10 +13,14 @@ import imgDiscord from "../../assets/partner/discord.webp";
 import imgSpotify from "../../assets/partner/spotify.webp";
 
 export class Home extends Component {
+  constructor(props) {
+    super();
+    console.log(props);
+  }
   render() {
     return (
       <Fragment>
-        <Header activeLink="home" />
+        <Header title="home" />
 
   <section className="hero mt-14 md:mt-28 w-full h-auto flex justify-center ">
     <div className="w-4/5 max-width">
@@ -69,7 +73,7 @@ export class Home extends Component {
     <div className="flex flex-col md:flex-row w-full md:gap-[10%]">
       <img src={imgTeamWork} alt="" className="md:w-1/2 h-fit" />
       <div className="flex flex-col md:w-1/2 justify-center">
-        <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">We Provide Good Coffee and Healthy Meals</h3>
+        <h3 className="font-medium text-2xl md:text-4xl md:leading-[50px]">We Provide Good Coffee and Healthy Meals</h3>
         <p className="text-sm md:text-base leading-6 md:leading-7 my-4 md:my-6">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
         <ul className="text-xs md:text-sm leading-6 md:leading-8">
           <li className="flex gap-2 md:gap-4"><img src="./img/icon/checklist.svg" alt="" /> High quality beans</li>
@@ -85,7 +89,7 @@ export class Home extends Component {
   <section className="bg-[#f8f8f885] w-full flex justify-center pt-9">
     <main className="flex flex-col items-center w-4/5 max-width">
       {/* <!-- FAVORITE PEOPLE --> */}
-      <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">Here is People’s Favorite</h3>
+      <h3 className="font-medium text-2xl md:text-4xl md:leading-[50px]">Here is People’s Favorite</h3>
       <p className="text-greydark text-sm md:text-base leading-6 md:leading-7 my-4 md:my-6">Let’s choose and have a bit taste of poeple’s favorite. It might be yours too!</p>
       {/* <!-- CARD-FAVORITE CONTAINER --> */}
       <article className="flex flex-col md:flex-row gap-12 pt-9 md:pt-20 pb-14 md:pb-28 md:justify-center w-full">
@@ -141,13 +145,13 @@ export class Home extends Component {
       </article>
 
       {/* <!-- STORE LOCATION CONTENT --> */}
-      <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">Visit Our Store in the Spot on the Map Below</h3>
+      <h3 className="font-medium text-2xl md:text-4xl md:leading-[50px]">Visit Our Store in the Spot on the Map Below</h3>
       <p className="text-greydark text-sm md:text-base leading-6 md:leading-7 my-4 md:my-6">See our store in every city on the spot and spen your good day there. See you soon!</p>
       <img src={imgMaps} alt="" />
       {/* <!-- [END] STORE LOCATION CONTENT --> */}
 
       {/* <!-- PARTNER CONTENT --> */}
-      <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">Our Partner</h3>
+      <h3 className="font-medium text-2xl md:text-4xl md:leading-[50px]">Our Partner</h3>
       <div className="w-full flex flex-col md:flex-row sm:grid sm:grid-cols-2 md:flex justify-center justify-items-center items-center mb-12">
         <div className="our-partner-img w-48">
           <img src={imgNetflix} alt="" className="w-full" />
@@ -168,7 +172,7 @@ export class Home extends Component {
       {/* <!-- [END] PARTNER CONTENT --> */}
 
       {/* <!-- COMENTARY CUSTOMER CONTENT --> */}
-      <h3 className="font-medium text-2xl md:text-3xl md:text-4xl md:leading-[50px]">Loved by Thousands of Happy Customer</h3>
+      <h3 className="font-medium text-2xl md:text-4xl md:leading-[50px]">Loved by Thousands of Happy Customer</h3>
       <p className="text-greydark text-sm md:text-base leading-6 md:leading-7 my-4 md:my-6">These are the stories of our customers who have visited us with great pleasure.</p>
       {/* <!-- COMMENTARY CONTAINER --> */}
       <div className="w-full flex flex-col md:flex-row gap-3 2xl:gap-14 pb-4 overflow-x-scroll xl:overflow-hidden">

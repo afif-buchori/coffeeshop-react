@@ -5,14 +5,26 @@ import Authentication from "./authentication";
 import Account from "./account";
 
 import logoBrand from "../../assets/icon/logo.svg";
+import toggleNav from "../../assets/icon/toggle-menu.svg"
+import toggleClose from "../../assets/icon/close.svg"
 
 export class Header extends Component {
   constructor(props) {
     super();
+    this.state = {
+      isLogin: false,
+      toggleActive: false,
+    }
+    this.handleToggle = this.handleToggle.bind(this);
     console.log(props);
   }
+
+  handleToggle() {
+    this.setState({ toggleActive: !this.state.toggleActive })
+  }
+
   render() {
-    const login = false;
+    // console.log(this.state);
     return (
 
   <header className="w-full fixed h-14 md:h-28 flex items-center justify-center shadow-lg bg-white z-50">
@@ -21,24 +33,23 @@ export class Header extends Component {
         <img src={logoBrand} alt="logo-brand" className="w-8"/>
         <h1 className="text-2xl font-bold">Coffee Shop</h1>
       </div>
-      <div className="navbar hidden md:flex items-center gap-10">
+      <div className={this.state.toggleActive ? "navbar right-0" : "navbar right-[-150%]"}>
         {/* <Link to="/home" className="navlink nav-active">Home</Link> */}
-        <Link to="/" className={this.props.activeLink === "home" ? "navlink nav-active" : "navlink"}>Home</Link>
-        <Link to="/products" className={this.props.activeLink === "products" ? "navlink nav-active" : "navlink"}>Product</Link>
-        <Link to="/yourcart" className={this.props.activeLink === "yourcart" ? "navlink nav-active" : "navlink"}>Your Cart</Link>
-        <Link to="/history" className={this.props.activeLink === "history" ? "navlink nav-active" : "navlink"}>History</Link>
+        <Link to="/" className={this.props.title === "home" ? "navlink nav-active" : "navlink"}>Home</Link>
+        <Link to="/products" className={this.props.title === "products" ? "navlink nav-active" : "navlink"}>Product</Link>
+        <Link to="/yourcart" className={this.props.title === "yourcart" ? "navlink nav-active" : "navlink"}>Your Cart</Link>
+        <Link to="/history" className={this.props.title === "history" ? "navlink nav-active" : "navlink"}>History</Link>
       </div>
-      <div className="account hidden md:flex items-center gap-10 ml-auto">
+      <div className={this.state.toggleActive === true ? "account right-0" : "account right-[-150%]"}>
 
-        { login ? <Account /> : <Authentication /> }
+        { this.state.isLogin ? <Account /> : <Authentication /> }
 
         {/* <Authentication /> */}
         {/* <Account /> */}
 
       </div>
-      <div className="flex">
-        <img src="./img/icon/toggle-menu.svg" alt="" className="w-10 md:hidden"/>
-        <img src="./img/icon/close.svg" alt="" className="hidden w-10"/>
+      <div onClick={this.handleToggle} className="toggle cursor-pointer flex">
+        <img src={this.state.toggleActive ? toggleClose : toggleNav} alt="" className="w-10 md:hidden"/>
       </div>
     </nav>
   </header>

@@ -1,54 +1,120 @@
 import React, { Component, Fragment } from 'react';
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+// import MenuLink from './menuLink';
+
+import withSearchParams from '../../utils/wrapper/withParams';
+
 import CardProducts from './cardProducts';
+import axios from 'axios';
 
 export class Products extends Component {
 
   constructor() {
     super();
     this.state = {
+      toggleCategoryActive: false,
+      category: "",
       data: [],
+      meta: "",
+    }
+    this.handleToggleMenu = this.handleToggleMenu.bind(this);
+  }
+
+  handleToggleMenu() {
+    this.setState({ toggleCategoryActive: !this.state.toggleCategoryActive })
+  }
+
+  handleClick = (params) => {
+    if(params === 0) {
+      this.props.setSearchParams({});
+      this.setState({
+        category: "",
+      });
+      return;
+    }
+    this.props.setSearchParams({
+      category: params,
+    });
+    this.setState({
+      category:params,
+    })
+  }
+  
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.category !== this.state.category) {
+      this.fetchData();
     }
   }
 
-  componentDidMount() { 
-    const url = "http://localhost:8080/products";
-    fetch(url)
+  fetchData() {
+    const parameter = Object.fromEntries(this.props.searchParams);
+    // eslint-disable-next-line no-undef
+    let url = `${process.env.REACT_APP_SERVER_HOST}/products`;
+    if(parameter.category) {
+      url += `?category=${parameter.category}`;
+    }
+    
+    // fetch(url)
+    //   .then((res) => {
+    //     if(!res.ok) throw res.status;
+    //     return res.json();
+    //   })
+    //   .then((db) => {
+    //     this.setState({
+    //       data: db.data,
+    //     })
+    //   })
+    //   .catch((err) => console.log(err.message));
+    axios.get(url)
     .then((res) => {
-      if(!res.ok) throw res.status;
-      return res.json();
-    })
-    .then((db) => {
       this.setState({
-        data: db.data,
+        data: res.data.data,
+        meta: res.data.meta,
       })
     })
-    .catch((err) => console.log(err.message));
+    .catch((err) => { 
+      console.log(err);
+      if(err.response.status === 404) {
+        console.log(err.response.data);
+      }
+      console.log(err.message) 
+    });
   }
+  
 
   render() {
     // console.log(this.state.data);
+    console.log(this.state.meta);
 
     return (
       <Fragment>
-        <Header activeLink="products" />
+        <Header title="products" />
 
   <main className="flex flex-col md:flex-row-reverse w-full mt-14 md:mt-28">
     {/* <!-- MENU PRODUCTS --> */}
-    <div className="w-full md:w-[65%] flex flex-col px md:pl-10 pb-10 md:mr-[5%] lg:mr-[10%]">
-      <div className="nav-menu h-20 hidden md:flex justify-between items-center mx-[5%]">
-        <a href="" className="navlink menu-active">Favorite Product</a>
-        <a href="" className="navlink">Coffee</a>
-        <a href="" className="navlink">Non Coffee</a>
-        <a href="" className="navlink">Foods</a>
-        <a href="" className="navlink">Add-on</a>
-      </div>
+    <div className="relative w-full md:w-[65%] flex flex-col px md:pl-10 pb-10 md:mr-[5%] lg:mr-[10%]">
+      <span onClick={this.handleToggleMenu} className="toggle-menu">Products Category<i className="bi bi-caret-down-fill text-2xl"></i></span>
+      <ul className={this.state.toggleCategoryActive ? "nav-menu static" : "nav-menu top-[-100%]"}>
+        <li onClick={() => this.handleClick(0)} className={this.state.category === "" ? "navlink menu-active" : "navlink"}>Favorite Product</li>
+        <li onClick={() => this.handleClick(1)} className={this.state.category === 1 ? "navlink menu-active" : "navlink"}>Coffee</li>
+        <li onClick={() => this.handleClick(2)} className={this.state.category === 2 ? "navlink menu-active" : "navlink"}>Non Coffee</li>
+        <li onClick={() => this.handleClick(3)} className={this.state.category === 3 ? "navlink menu-active" : "navlink"}>Foods</li>
+        <li onClick={() => this.handleClick(4)} className={this.state.category === 4 ? "navlink menu-active" : "navlink"}>Add-on</li>
+      </ul>
       <div className="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-[90px] pt-20 px-[5%] sm:px-[10%] md:px-0">
 
         {this.state.data.map(product => (
           <CardProducts key={product.id} image={product.image} prodName={product.prod_name} price={product.price} />
+          // <CardProducts key={product.id} image={`http://localhost:8080${product.image}`} prodName={product.prod_name} price={product.price} />
         ))}
+
+        <button>{this.state.meta.prev !== null ? "Prev" : ""}</button>
+        <button>{this.state.meta.next !== null ? "Next" : ""}</button>
 
       </div>
     </div>
@@ -67,10 +133,10 @@ export class Products extends Component {
         <p className="text-sm text-center">Buy 1 Choco Oreo and get 20% off for Beef Spaghetti</p>
         <hr className="border border-black border-dashed w-[111%]" />
         <p className="">COUPON CODE</p>
-        <h3 className="font-bold text-3xl">FNPR15RG</h3>
+        <h3 className="font-bold text-3xl font-popins">FNPR15RG</h3>
         <h4 className="text-xs">Valid untill October 10th 2020</h4>
       </div>
-      <button className="btn w-[284px] h-16 text-white bg-secondary rounded-2xl mt-10">Apply Coupon</button>
+      <button className="btn w-[284px] h-16 text-white bg-secondary rounded-2xl mt-10 font-popins">Apply Coupon</button>
       <div className="mt-28">
         <h5 className="text-sm font-bold">Terms and Condition</h5>
       <ol className="text-sm list-decimal list-inside">
@@ -91,4 +157,4 @@ export class Products extends Component {
   }
 }
 
-export default Products
+export default withSearchParams(Products);

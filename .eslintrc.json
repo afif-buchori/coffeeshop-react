@@ -17,7 +17,7 @@
         "react"
     ],
     "rules": {
-        "react/prop-types": "warn",
+        "react/prop-types": "off",
         "jsx-quotes": "error"
     }
 }
