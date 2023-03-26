@@ -9,13 +9,13 @@ export class Profile extends Component {
         <Header />
 
   <main className="hero-profile w-full h-auto flex justify-center mt-14 md:mt-28">
-    <div className="w-4/5 max-width flex flex-col">
+    <div className="w-full px-[5%] md:px-0 md:w-4/5 max-width flex flex-col">
       <h1 className="font-medium text-4xl text-white py-10">User Profile</h1>
       <form action="">
-        <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row gap-8">
 
-          <div className="w-80 h-[380px] flex flex-col justify-between items-center rounded-2xl border overflow-hidden bg-white relative">
-            <button className="btn w-8 h-8 flex justify-center items-center rounded-full bg-secondary cursor-pointer absolute top-32 right-16"><i className="bi bi-pencil text-white"></i></button>
+          <div className="w-full md:w-80 h-[380px] flex flex-col justify-between items-center rounded-2xl border overflow-hidden bg-white relative">
+            <button className="btn w-8 h-8 flex justify-center items-center rounded-full bg-secondary cursor-pointer absolute top-32 right-[33%] md:right-16"><i className="bi bi-pencil text-white"></i></button>
             <span className="w-32 h-32 rounded-full border-2 overflow-hidden mt-8">
               <img src="../img/user.png.webp" alt="profile-picture" />
             </span>
@@ -30,7 +30,7 @@ export class Profile extends Component {
               <h2 className="font-bold text-2xl text-greydark">Contacts</h2>
               <button className="btn w-12 h-12 flex justify-center items-center rounded-full bg-secondary cursor-pointer"><i className="bi bi-pencil text-xl text-white"></i></button>
             </div>
-            <div className="grid grid-cols-2 gap-9 ml-8 mr-14">
+            <div className="flex flex-col md:grid grid-cols-2 gap-9 ml-8 mr-14">
               <div className="input flex flex-col">
                 <label htmlFor="email" className="font-medium text-xl text-grey">Email adress :</label>
                 <input type="text" id="email" value="zulaikha17@gmail.com" className="h-14" />
@@ -39,7 +39,7 @@ export class Profile extends Component {
                 <label htmlFor="phone" className="font-medium text-xl text-grey">Mobile number :</label>
                 <input type="text" id="phone" value="(+62)813456782" className="h-14" />
               </div>
-              <div className="input flex flex-col">
+              <div className="input flex flex-col mb-5 md:mb-0">
                 <label htmlFor="address" className="font-medium text-xl text-grey">Delivery address :</label>
                 <textarea name="" id="address" rows="2">Iskandar Street no. 67 Block A Near Bus Stop</textarea>
               </div>
@@ -48,13 +48,13 @@ export class Profile extends Component {
           </div>
 
         </div>
-        <div className="flex gap-8 my-10">
+        <div className="flex flex-col md:flex-row gap-8 my-10">
           <div className="w-full min-h-[420px] flex flex-col justify-between rounded-2xl border overflow-hidden bg-white">
             <div className="flex justify-between items-center pl-8 pr-5 mt-4">
               <h2 className="font-bold text-2xl text-greydark">Details</h2>
               <button className="btn w-12 h-12 flex justify-center items-center rounded-full bg-secondary cursor-pointer"><i className="bi bi-pencil text-xl text-white"></i></button>
             </div>
-            <div className="flex ml-8 mr-14 gap-9 w-fulll">
+            <div className="flex flex-col md:flex-row ml-8 mr-14 gap-9 w-fulll">
               <div className="flex flex-1 gap-9 flex-col">
 
                 <div className="input flex flex-col">
@@ -84,7 +84,7 @@ export class Profile extends Component {
                     <span></span>
                     <label htmlFor="male" className="font-medium text-xl text-grey cursor-pointer">Male</label>
                   </div>
-                  <div className="input-data-radio flex gap-2">
+                  <div className="input-data-radio flex gap-2 mb-5 md:mb-0">
                     <input type="radio" name="gender" id="female" value="female" className="hidden" checked />
                     <span></span>
                     <label htmlFor="female" className="font-medium text-xl text-grey cursor-pointer">Female</label>
@@ -95,9 +95,9 @@ export class Profile extends Component {
             <hr className="w-full h-4 bg-secondary" />
           </div>
 
-          <div className="flex min-w-[300px] max-w-sm flex-col justify-between pb-6">
+          <div className="flex min-w-[300px] max-w-sm flex-col gap-3 justify-between pb-6">
             <h3 className="font-bold text-xl text-center text-white">Do you want to save the change?</h3>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 mb-10 md:mb-0">
               <button className="btn h-14 rounded-2xl text-white bg-secondary">Save Change</button>
               <button className="btn h-14 rounded-2xl text-secondary bg-primary">Cancel</button>
             </div>

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
 import Authentication from "./authentication";
 import Account from "./account";
 
 import logoBrand from "../../assets/icon/logo.svg";
 import toggleNav from "../../assets/icon/toggle-menu.svg"
 import toggleClose from "../../assets/icon/close.svg"
+
 
 export class Header extends Component {
   constructor(props) {
@@ -42,7 +44,7 @@ export class Header extends Component {
       </div>
       <div className={this.state.toggleActive === true ? "account right-0" : "account right-[-150%]"}>
 
-        { this.state.isLogin ? <Account /> : <Authentication /> }
+        { this.state.isLogin ? <Account searchValue={this.props.searchValue} /> : <Authentication /> }
 
         {/* <Authentication /> */}
         {/* <Account /> */}

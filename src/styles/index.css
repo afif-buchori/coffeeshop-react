@@ -100,6 +100,20 @@ code {
     @apply text-white font-bold relative;
   }
 
+  .nav-search {
+    @apply cursor-pointer w-auto flex relative;
+    transition: 0.1s linear;
+  }
+  .nav-search-active {
+    @apply w-44 h-9 bg-[#EFEEEE] rounded-3xl;
+  }
+  .nav-search img {
+    @apply ml-2;
+  }
+  .nav-search input {
+    @apply w-full h-8 pl-2 pr-3 bg-transparent;
+  }
+  
   .navbar {
     @apply absolute top-32 w-full md:w-auto pr-10 md:pr-0 py-5 md:py-0 md:static flex flex-col md:flex-row bg-white md:bg-transparent items-end md:items-center justify-center gap-6 md:gap-10 border-b md:border-b-0 border-grey shadow-2xl shadow-slate-500 md:shadow-none;
     transition: 0.2s linear;

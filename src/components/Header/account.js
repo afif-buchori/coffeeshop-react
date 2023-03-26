@@ -5,11 +5,29 @@ import profilePict from "../../assets/user.webp";
 import { Link } from 'react-router-dom';
 
 export class Account extends Component {
+  constructor() {
+    super();
+    this.state = {
+      toggleSearch: false,
+    }
+    this.isInput = React.createRef();
+  }
+  handleToggleSearch(info) {
+    if(this.isInput.current.value) return this.setState({ toggleSearch: true });
+    this.setState({
+      toggleSearch: info,
+    })
+  }
+  handleSearching = () => {
+    console.log(this.isInput.current.value);
+    this.props.searchValue(this.isInput.current.value);
+  }
   render() {
     return (
       <Fragment>
-        <div className="cursor-pointer">
-          <img src={iconSearch} alt="" className="w-7" />
+        <div onMouseOver={() => this.handleToggleSearch(true)} onMouseOut={() => this.handleToggleSearch(false)} className={this.state.toggleSearch ? "nav-search nav-search-active" : "nav-search"}>
+          <img src={iconSearch} alt="" className={this.state.toggleSearch ? "w-6" : "w-7"} onClick={this.handleSearching} />
+          <input ref={this.isInput} placeholder="Search" className={this.state.toggleSearch ? "block" : "hidden"} />
         </div>
         <div className="relative cursor-pointer">
           <span className="flex w-4 h-4 rounded-full justify-center items-center text-[8px] text-white bg-secondary absolute -top-2 -left-2">1</span>
