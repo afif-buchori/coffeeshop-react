@@ -4,6 +4,11 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_SERVER_HOST;
 
 export const getProducts = (params, controller) => {
-  const url = `${baseUrl}/products?${params}`
+  const url = `${baseUrl}/products?${params}`;
   return axios.get(url, { signal: controller.signal });
-}
+};
+
+export const getProductsDetails = (params, controller) => {
+  const url = `${baseUrl}/products/${params}`;
+  return axios.get(url, params, { signal: controller.signal });
+};

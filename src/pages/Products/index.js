@@ -12,15 +12,14 @@ import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
 
 export class Products extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       toggleCategoryActive: false,
       category: "",
       isLoading: true,
       data: [],
       meta: "",
-      // srcPar: {},
     };
     this.controller = new AbortController();
     this.handleToggleMenu = this.handleToggleMenu.bind(this);
@@ -43,9 +42,6 @@ export class Products extends Component {
     });
     this.setState({
       category: params,
-      // srcPar: {
-      //   category: params,
-      // }
     });
   };
 
@@ -76,21 +72,20 @@ export class Products extends Component {
     this.props.setSearchParams({
       category: this.state.category,
       order: selected,
-      // search: this.props.searchValue,
+      search: this.props.searchValue || "",
     });
-    // this.setState({ srcPar: { ...this.state.srcPar, order: selected } })
   };
 
   componentDidMount() {
     this.fetchData();
   }
 
-  async componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     const prevParams = Object.fromEntries(prevProps.searchParams);
     const newParams = Object.fromEntries(this.props.searchParams);
     if (JSON.stringify(prevParams) !== JSON.stringify(newParams)) {
       this.setState({ isLoading: true });
-      await this.fetchData();
+      this.fetchData();
     }
   }
 
@@ -112,10 +107,6 @@ export class Products extends Component {
       });
   }
 
-  handleNavigate(to) {
-    this.props.navigate(to);
-  }
-
   handleSearch = (value) => {
     this.props.setSearchParams({
       category: this.state.category,
@@ -125,7 +116,7 @@ export class Products extends Component {
 
   render() {
     // console.log(this.state.srcPar);
-    // console.log(this.state.meta.next);
+    console.log(this.state.meta.next);
     const shorter = Object.fromEntries(this.props.searchParams);
 
     return (
@@ -195,8 +186,7 @@ export class Products extends Component {
                 <label htmlFor="short">Short By :</label>
                 <select onChange={this.handleShorting} name="short" id="short">
                   <option value="" disabled selected={!shorter.order && true}>
-                    {" "}
-                    ...{" "}
+                    - - - - -
                   </option>
                   <option
                     value="cheapest"
@@ -221,10 +211,10 @@ export class Products extends Component {
                 this.state.data.map((product) => (
                   <CardProducts
                     key={product.id}
+                    id={product.id}
                     image={product.image}
                     prodName={product.prod_name}
                     price={product.price}
-                    onClick={() => this.handleNavigate("/details")}
                   />
                   // <CardProducts key={product.id} image={`http://localhost:8080${product.image}`} prodName={product.prod_name} price={product.price} />
                 ))

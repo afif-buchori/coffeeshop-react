@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { get } from "../localStorage";
 
-function PrivateRoute({ children, ...restProps }) {
+function PublicRoute({ children, ...restProps }) {
   const navigate = useNavigate();
   useEffect(() => {
     const token = get("coffeeShop-token");
@@ -23,4 +23,4 @@ function PrivateRoute({ children, ...restProps }) {
   );
 }
 
-export default PrivateRoute;
+export default PublicRoute;

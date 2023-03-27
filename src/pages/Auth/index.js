@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Footer from "../../components/Footer";
 
-import { login } from "../../utils/https/auth";
+import { login, register } from "../../utils/https/auth";
 import { save } from "../../utils/localStorage";
 
 import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
 
 function Login() {
-  const controller = React.useMemo(() => new AbortController(), []);
+  const controller = useMemo(() => new AbortController(), []);
 
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
   });
@@ -71,8 +71,8 @@ function Login() {
       </Link>
       <button
         type="submit"
-        className="btn h-14 md:h-[75px] text-xl text-secondary bg-primary rounded-2xl shadow-md shadow-primary mb-7"
         onClick={loginHandler}
+        className="btn h-14 md:h-[75px] text-xl text-secondary bg-primary rounded-2xl shadow-md shadow-primary mb-7"
       >
         Login
       </button>
@@ -87,6 +87,33 @@ function Login() {
 }
 
 function Register() {
+  const controller = useMemo(() => new AbortController(), []);
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    phone: "",
+  });
+
+  const onChangeForm = (event) => {
+    setForm((form) => {
+      return {
+        ...form,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+
+  const registerHandler = (event) => {
+    event.preventDefault();
+    console.log(form);
+    register(form.email, form.password, form.phone, controller)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <form className="flex flex-col px-[10%] md:px-0 md:mt-[10%] md:ml-[10%] mb-[26%]">
       <h1 className="font-bold text-2xl md:text-4xl text-secondary my-6 md:mt-0 md:mb-14 text-center">
@@ -98,15 +125,21 @@ function Register() {
       <input
         type="text"
         id="email"
+        name="email"
+        value={form.email}
+        onChange={onChangeForm}
         placeholder="Enter your email address"
         className="input-auth mb-8"
       />
       <label htmlFor="password" className="font-bold text-xl mb-3">
-        Email Address :
+        Password :
       </label>
       <input
         type="password"
         id="password"
+        name="password"
+        value={form.password}
+        onChange={onChangeForm}
         placeholder="Enter your password"
         className="input-auth mb-8"
       />
@@ -116,11 +149,15 @@ function Register() {
       <input
         type="text"
         id="phone"
+        name="phone"
+        value={form.phone}
+        onChange={onChangeForm}
         placeholder="Enter your phone number"
         className="input-auth mb-8"
       />
       <button
         type="submit"
+        onClick={registerHandler}
         className="btn h-14 md:h-[75px] text-xl text-secondary bg-primary rounded-2xl shadow-md shadow-primary mb-7"
       >
         Sign Up
@@ -163,7 +200,7 @@ function Auth() {
               className="btn w-28 md:w-36 h-11 bg-primary text-secondary rounded-3xl shadow-2xl shadow-primary"
               onClick={changeMode}
             >
-              {mode}
+              {mode !== "Login" ? "Login" : "Sign Up"}
             </button>
           </div>
 
