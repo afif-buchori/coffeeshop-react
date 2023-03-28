@@ -102,6 +102,7 @@ export class Products extends Component {
       .then((res) => {
         this.setState({
           isLoading: false,
+          isNotFound: false,
           data: res.data.data,
           meta: res.data.meta,
         });
@@ -111,6 +112,7 @@ export class Products extends Component {
         if (err.response.status === 404) {
           this.setState({
             isLoading: false,
+            isNotFound: true,
           });
         }
         console.log(err.message);
@@ -192,6 +194,8 @@ export class Products extends Component {
 
             {this.state.isLoading ? (
               ""
+            ) : this.state.isNotFound ? (
+              ""
             ) : (
               <div className="ml-[5%] my-5">
                 <label htmlFor="short">Short By :</label>
@@ -217,7 +221,11 @@ export class Products extends Component {
 
             <div
               className={`w-full ${
-                this.state.isNotFound ? "flex" : "grid"
+                this.state.isLoading
+                  ? "flex"
+                  : this.state.isNotFound
+                  ? "flex"
+                  : "grid"
               } grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-[90px] pt-20 px-[5%] sm:px-[10%] md:px-0`}
             >
               {/* <div className="w-full flex flex-wrap gap-[90px] pt-20 ml-[5%] sm:ml-[10%] md:px-0"> */}
@@ -240,13 +248,25 @@ export class Products extends Component {
             </div>
             {this.state.isLoading ? (
               ""
+            ) : this.state.isNotFound ? (
+              ""
             ) : (
-              <div className="ml-[5%] mt-10 text-xl font-bold hover:text-secondary w-fit">
-                <button onClick={() => this.handlePage(this.state.meta.prev)}>
-                  {this.state.meta.prev === null ? "" : "Prev"}
+              <div className="mx-[30%] mt-10 text-xl font-bold flex gap-10">
+                <button
+                  onClick={() => this.handlePage(this.state.meta.prev)}
+                  className={`text-base w-16 hover:text-primary text-white btn p-2 rounded-lg bg-secondary ${
+                    this.state.meta.prev === null && "hidden"
+                  }`}
+                >
+                  Prev
                 </button>
-                <button onClick={() => this.handlePage(this.state.meta.next)}>
-                  {this.state.meta.next === null ? "" : "Next"}
+                <button
+                  onClick={() => this.handlePage(this.state.meta.next)}
+                  className={`text-base w-16 hover:text-primary text-white btn p-2 rounded-lg bg-secondary ml-auto ${
+                    this.state.meta.next === null && "hidden"
+                  }`}
+                >
+                  Next
                 </button>
               </div>
             )}

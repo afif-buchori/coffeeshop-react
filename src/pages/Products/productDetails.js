@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import DataNotFound from "../../components/DataNotFound";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
@@ -9,6 +10,7 @@ function ProductDetails() {
   const { id } = useParams();
   const [dataProduct, setDataProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isNotFound, setIsNotFound] = useState(true);
   const [selectedSize, setSelectedSize] = useState("Regular");
   const [selectedDelivery, setSelectedDelivery] = useState("dine in");
   const [qty, setQty] = useState(1);
@@ -21,8 +23,13 @@ function ProductDetails() {
       const result = await getProductsDetails(id, controller);
       setDataProduct(result.data.data[0]);
       setIsLoading(false);
+      setIsNotFound(false);
     } catch (error) {
-      console.log(error.message);
+      if (error.response.status === 404) {
+        setIsNotFound(true);
+        setIsLoading(false);
+      }
+      console.log(error);
     }
   };
 
@@ -50,9 +57,13 @@ function ProductDetails() {
 
   return (
     <>
-      <Header />
+      <Header title="products" />
       {isLoading ? (
         <Loader />
+      ) : isNotFound ? (
+        <div className="w-full flex h-auto mt-14 md:mt-28">
+          <DataNotFound />
+        </div>
       ) : (
         <>
           <section className="flex justify-center w-full mt-14 md:mt-28 bg-slate-100">

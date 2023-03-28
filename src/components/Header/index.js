@@ -12,7 +12,7 @@ export class Header extends Component {
   constructor(props) {
     super();
     this.state = {
-      isLogin: false,
+      isLogin: true,
       toggleActive: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
