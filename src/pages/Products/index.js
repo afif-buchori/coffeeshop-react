@@ -7,9 +7,10 @@ import withSearchParams from "../../utils/wrapper/withParams";
 import withNavigate from "../../utils/wrapper/withNavigate";
 
 import CardProducts from "./cardProducts";
-import axios from "axios";
+// import axios from "axios";
 import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
+import DataNotFound from "../../components/DataNotFound";
 
 export class Products extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export class Products extends Component {
       toggleCategoryActive: false,
       category: "",
       isLoading: true,
+      isNotFound: true,
       data: [],
       meta: "",
     };
@@ -46,23 +48,29 @@ export class Products extends Component {
   };
 
   handlePage = (params) => {
-    // eslint-disable-next-line no-undef
-    let url = process.env.REACT_APP_SERVER_HOST + params;
-    axios
-      .get(url)
-      .then((res) => {
-        this.setState({
-          data: res.data.data,
-          meta: res.data.meta,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 404) {
-          console.log(err.response.data);
-        }
-        console.log(err.message);
-      });
+    const urlParams = params.replace("/products?", "");
+    const queryParams = new URLSearchParams(urlParams);
+    // console.log(Object.fromEntries(queryParams));
+
+    this.props.setSearchParams(Object.fromEntries(queryParams));
+
+    // // eslint-disable-next-line no-undef
+    // let url = process.env.REACT_APP_SERVER_HOST + params;
+    // axios
+    //   .get(url)
+    //   .then((res) => {
+    //     this.setState({
+    //       data: res.data.data,
+    //       meta: res.data.meta,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     if (err.response.status === 404) {
+    //       console.log(err.response.data);
+    //     }
+    //     console.log(err.message);
+    //   });
   };
 
   handleShorting = (event) => {
@@ -101,7 +109,9 @@ export class Products extends Component {
       .catch((err) => {
         console.log(err);
         if (err.response.status === 404) {
-          console.log(err.response.data);
+          this.setState({
+            isLoading: false,
+          });
         }
         console.log(err.message);
       });
@@ -116,7 +126,8 @@ export class Products extends Component {
 
   render() {
     // console.log(this.state.srcPar);
-    console.log(this.state.meta.next);
+    // console.log(this.state.meta.next);
+
     const shorter = Object.fromEntries(this.props.searchParams);
 
     return (
@@ -204,9 +215,16 @@ export class Products extends Component {
               </div>
             )}
 
-            <div className="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-[90px] pt-20 px-[5%] sm:px-[10%] md:px-0">
+            <div
+              className={`w-full ${
+                this.state.isNotFound ? "flex" : "grid"
+              } grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-[90px] pt-20 px-[5%] sm:px-[10%] md:px-0`}
+            >
+              {/* <div className="w-full flex flex-wrap gap-[90px] pt-20 ml-[5%] sm:ml-[10%] md:px-0"> */}
               {this.state.isLoading ? (
                 <Loader />
+              ) : this.state.isNotFound ? (
+                <DataNotFound />
               ) : (
                 this.state.data.map((product) => (
                   <CardProducts

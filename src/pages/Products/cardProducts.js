@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import withNavigate from "../../utils/wrapper/withNavigate";
 
 export class CardProducts extends Component {
-  constructor(props) {
-    super();
-    console.log(props);
-  }
+  // constructor(props) {
+  //   super();
+  //   console.log(props);
+  // }
 
   handleNavigate(to) {
     this.props.navigate(to);
