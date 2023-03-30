@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
 
 import DataNotFound from "../../components/DataNotFound";
 import Footer from "../../components/Footer";
@@ -10,8 +9,6 @@ import Loader from "../../components/Loader";
 import { getProductsDetails } from "../../utils/https/products";
 
 function ProductDetails() {
-  // const state = useSelector((state) => state);
-
   const { id } = useParams();
   const [dataProduct, setDataProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -20,13 +17,12 @@ function ProductDetails() {
   const [selectedDelivery, setSelectedDelivery] = useState("dine in");
   const [qty, setQty] = useState(1);
 
-  // const controller = new AbortController();
   const controller = React.useMemo(() => new AbortController(), []);
 
   const fetchData = async (id) => {
     try {
       const result = await getProductsDetails(id, controller);
-      setDataProduct(result.data.data[0]);
+      setDataProduct(result.data.data);
       setIsLoading(false);
       setIsNotFound(false);
     } catch (error) {
@@ -93,7 +89,7 @@ function ProductDetails() {
                     {dataProduct.prod_name}
                   </h1>
                   <p className="font-medium text-2xl md:text-4xl mb-8">
-                    {/* IDR {dataProduct.price.toLocaleString("id-ID")} */}
+                    IDR {dataProduct.price.toLocaleString("id-ID")}
                   </p>
                   <button className="btn text-2xl text-white bg-secondary w-full h-20 rounded-2xl mb-6">
                     Add to Cart

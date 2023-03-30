@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLogin: false,
   id: null,
-  Image: null,
+  image: null,
   role: null,
   token: null,
 };
@@ -21,6 +21,14 @@ const userSlice = createSlice({
         image: action.payload.dataUser.profile_picture,
         role: action.payload.dataUser.role_id,
         token: action.payload.token,
+      };
+    },
+    authLogout: () => {
+      return {
+        isLogin: false,
+        id: null,
+        role: null,
+        token: null,
       };
     },
   },
