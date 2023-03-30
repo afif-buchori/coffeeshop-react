@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+
 import DataNotFound from "../../components/DataNotFound";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
+
 import { getProductsDetails } from "../../utils/https/products";
 
 function ProductDetails() {
+  // const state = useSelector((state) => state);
+
   const { id } = useParams();
   const [dataProduct, setDataProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);

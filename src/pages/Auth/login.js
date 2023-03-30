@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../utils/https/auth";
-import { save } from "../../utils/localStorage";
+// import { save } from "../../utils/localStorage";
+
+import { useDispatch } from "react-redux";
+import { userAction } from "../../redux/slices/auth";
 
 import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
@@ -9,6 +12,8 @@ import Footer from "../../components/Footer";
 
 function Login() {
   const controller = useMemo(() => new AbortController(), []);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     email: "",
@@ -29,8 +34,12 @@ function Login() {
     login(form.email, form.password, controller)
       .then((res) => {
         console.log(res.data);
-        const key = "coffeeShop-token";
-        save(key, res.data.token);
+        dispatch(userAction.authLogin(res.data));
+        // const key = "coffeeShop-token";
+        // save(key, res.data.token);
+        navigate("/", {
+          replace: true,
+        });
       })
       .catch((err) => console.log(err));
   };

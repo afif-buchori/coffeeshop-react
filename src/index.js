@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import "./styles/index.css";
 import router from "./router";
@@ -8,6 +10,7 @@ import router from "./router";
 // import reportWebVitals from './reportWebVitals';
 
 import { searchContexts as SearchContexts } from "./utils/contexts";
+import store, { persistor } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 function Run({ isStrict, children }) {
@@ -22,10 +25,14 @@ function App() {
   };
   return (
     <Run isStrict={false}>
-      {/* <App name="Afif" age={20} href={"https://reactjs.org"} /> */}
-      <SearchContexts.Provider value={{ searchContexts, updateSearch }}>
-        <RouterProvider router={router} />
-      </SearchContexts.Provider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          {/* <App name="Afif" age={20} href={"https://reactjs.org"} /> */}
+          <SearchContexts.Provider value={{ searchContexts, updateSearch }}>
+            <RouterProvider router={router} />
+          </SearchContexts.Provider>
+        </PersistGate>
+      </Provider>
     </Run>
   );
 }

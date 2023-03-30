@@ -27,7 +27,7 @@ export class Account extends Component {
     this.context.updateSearch(this.isInput.current.value);
   };
   render() {
-    console.log(this.context.searchContexts);
+    // console.log(this.context.searchContexts);
     return (
       <Fragment>
         <div

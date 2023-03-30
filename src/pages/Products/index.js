@@ -51,36 +51,19 @@ export class Products extends Component {
     const urlParams = params.replace("/products?", "");
     const queryParams = new URLSearchParams(urlParams);
     // console.log(Object.fromEntries(queryParams));
-
     this.props.setSearchParams(Object.fromEntries(queryParams));
-
-    // // eslint-disable-next-line no-undef
-    // let url = process.env.REACT_APP_SERVER_HOST + params;
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     this.setState({
-    //       data: res.data.data,
-    //       meta: res.data.meta,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     if (err.response.status === 404) {
-    //       console.log(err.response.data);
-    //     }
-    //     console.log(err.message);
-    //   });
   };
 
   handleShorting = (event) => {
     const selected = event.target.value;
-    console.log(selected);
-    console.log(Object.fromEntries(this.props.searchParams));
+    // console.log(selected);
+    // console.log(Object.fromEntries(this.props.searchParams));
     this.props.setSearchParams({
-      category: this.state.category,
+      // category: this.state.category,
+      // order: selected,
+      // search: this.props.searchValue || "",
+      ...Object.fromEntries(this.props.searchParams),
       order: selected,
-      search: this.props.searchValue || "",
     });
   };
 

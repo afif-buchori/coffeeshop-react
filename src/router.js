@@ -14,19 +14,27 @@ import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
 
 import PrivateRoute from "./utils/wrapper/privateRoute";
+import PublicRoute from "./utils/wrapper/publicRoute";
 
 const router = createBrowserRouter([
   // { path: "/", element: <App name="Afif" age={20} href={"https://reactjs.org"} /> },
   { path: "/", element: <Home /> },
   { path: "/auth", element: <Auth /> },
-  { path: "/login", element: <Login /> },
+  {
+    path: "/login",
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
+  },
   { path: "/signup", element: <Signup /> },
   { path: "/products", element: <Products /> },
   { path: "/products/:id", element: <ProductDetails /> },
   {
     path: "/profile",
     element: (
-      <PrivateRoute user={null}>
+      <PrivateRoute>
         <Profile />
       </PrivateRoute>
     ),
