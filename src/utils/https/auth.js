@@ -34,11 +34,19 @@ export const getUser = (id, controller) => {
   return axios.get(url, { signal: controller.signal });
 };
 
-export const updateDataUser = (body, controller) => {
+export const updateDataUser = (file, body, controller) => {
   const url = `${baseUrl}/auth/profile`;
   const storeToken = store.getState();
   const token = storeToken.user.token;
-  return axios.patch(url, body, {
+  const formData = new FormData();
+  if (file !== "") {
+    formData.append("image", file);
+  }
+  Object.keys(body).forEach((key) => {
+    formData.set(key, body[key]);
+  });
+  console.log(formData);
+  return axios.patch(url, formData, {
     signal: controller.signal,
     headers: { Authorization: `Bearer ${token}` },
   });

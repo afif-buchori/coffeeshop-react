@@ -26,8 +26,7 @@ const counterSlice = createSlice({
       return { ...prevState, delivery: action.payload };
     },
     addtoCart: (prevState, action) => {
-      console.log(prevState);
-      console.log(action.payload);
+      // console.log(action.payload);
 
       const exsistIdx = prevState.shoppingCart.findIndex(
         (item) =>

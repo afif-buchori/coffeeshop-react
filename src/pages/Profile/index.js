@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
-import imgUserDefault from "../../assets/user-default.png";
+// import imgUserDefault from "../../assets/user-default.png";
 import { getUser, updateDataUser } from "../../utils/https/auth";
 import { userAction } from "../../redux/slices/auth";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ function Profile() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form, setForm] = useState();
+  const [profPict, setProfPict] = useState("");
 
   const fetchDataUser = async (id) => {
     try {
@@ -32,12 +33,20 @@ function Profile() {
   };
 
   const handleForm = (event) => {
-    setDataUser((dataUser) => {
-      return { ...dataUser, [event.target.name]: event.target.value };
-    });
-    setForm((form) => {
-      return { ...form, [event.target.name]: event.target.value };
-    });
+    if (event.target.name === "profile_picture") {
+      console.log(event.target.files);
+      setDataUser((dataUser) => {
+        return { ...dataUser, [event.target.name]: event.target.files[0] };
+      });
+      setProfPict(event.target.files[0]);
+    } else {
+      setDataUser((dataUser) => {
+        return { ...dataUser, [event.target.name]: event.target.value };
+      });
+      setForm((form) => {
+        return { ...form, [event.target.name]: event.target.value };
+      });
+    }
   };
 
   const handleSave = async (event) => {
@@ -45,7 +54,7 @@ function Profile() {
     console.log(form);
     setIsLoading(true);
     try {
-      const result = await updateDataUser(form, controller);
+      const result = await updateDataUser(profPict, form, controller);
       console.log(result);
       setIsLoading(false);
     } catch (error) {
@@ -100,7 +109,11 @@ function Profile() {
                       <i className="bi bi-pencil text-white"></i>
                     </label>
                     <img
-                      src={dataUser.profile_picture || imgUserDefault}
+                      src={
+                        profPict === ""
+                          ? dataUser.profile_picture
+                          : URL.createObjectURL(profPict)
+                      }
                       alt="profile-picture"
                       className="w-full h-full rounded-full border-2 overflow-hidden"
                     />
