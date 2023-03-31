@@ -8,6 +8,7 @@ import imgUserDefault from "../../assets/user-default.png";
 import { getUser, updateDataUser } from "../../utils/https/auth";
 import { userAction } from "../../redux/slices/auth";
 import { useNavigate } from "react-router-dom";
+import ChangePwd from "./changePwd";
 
 function Profile() {
   const controller = useMemo(() => new AbortController(), []);
@@ -17,6 +18,7 @@ function Profile() {
 
   const [dataUser, setDataUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [form, setForm] = useState();
 
   const fetchDataUser = async (id) => {
@@ -41,9 +43,11 @@ function Profile() {
   const handleSave = async (event) => {
     event.preventDefault();
     console.log(form);
+    setIsLoading(true);
     try {
       const result = await updateDataUser(form, controller);
       console.log(result);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -52,6 +56,13 @@ function Profile() {
   const handleLogout = () => {
     dispatch(userAction.authLogout());
     navigate("/", { replace: true });
+  };
+
+  const handleEditPwd = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -313,10 +324,18 @@ function Profile() {
                     </button>
                   </div>
                   <div className="flex flex-col gap-5">
-                    <button className="btn h-14 rounded-2xl text-secondary bg-white flex justify-between px-10">
+                    <button
+                      type="button"
+                      onClick={handleEditPwd}
+                      className="btn h-14 rounded-2xl text-secondary bg-white flex justify-between px-10"
+                    >
                       Edit Password
                       <i className="bi bi-caret-right-fill text-secondary"></i>
                     </button>
+                    <ChangePwd
+                      isOpen={isModalOpen}
+                      onClose={handleCloseModal}
+                    />
                     <button
                       type="button"
                       onClick={handleLogout}

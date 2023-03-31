@@ -13,7 +13,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     authLogin: (prevState, action) => {
-      console.log(action.payload);
       return {
         ...prevState,
         isLogin: true,

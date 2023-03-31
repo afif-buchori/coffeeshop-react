@@ -33,7 +33,7 @@ function Login() {
     event.preventDefault();
     login(form.email, form.password, controller)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(userAction.authLogin(res.data));
         // const key = "coffeeShop-token";
         // save(key, res.data.token);

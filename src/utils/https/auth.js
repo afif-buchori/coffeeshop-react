@@ -44,6 +44,16 @@ export const updateDataUser = (body, controller) => {
   });
 };
 
+export const editPassword = (body, controller) => {
+  const url = `${baseUrl}/auth`;
+  const storeToken = store.getState();
+  const token = storeToken.user.token;
+  return axios.patch(url, body, {
+    signal: controller.signal,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
 export const checkToken = (controller) => {
   const url = `${baseUrl}/auth/private`;
   const token = get("coffeeShop-token");

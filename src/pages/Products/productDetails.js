@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import DataNotFound from "../../components/DataNotFound";
@@ -7,17 +8,21 @@ import Header from "../../components/Header";
 import Loader from "../../components/Loader";
 
 import { getProductsDetails } from "../../utils/https/products";
+import { counterAction } from "../../redux/slices/counter";
 
 function ProductDetails() {
-  const { id } = useParams();
-  const [dataProduct, setDataProduct] = useState();
+  const controller = React.useMemo(() => new AbortController(), []);
+  const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = useState(true);
   const [isNotFound, setIsNotFound] = useState(true);
-  const [selectedSize, setSelectedSize] = useState("Regular");
-  const [selectedDelivery, setSelectedDelivery] = useState("dine in");
-  const [qty, setQty] = useState(1);
 
-  const controller = React.useMemo(() => new AbortController(), []);
+  const { id } = useParams();
+  const [dataProduct, setDataProduct] = useState();
+  const [qty, setQty] = useState(1);
+  const [selectedSize, setSelectedSize] = useState("Regular");
+  // const [selectedDelivery, setSelectedDelivery] = useState("dine in");
+  const selectedDelivery = useSelector((state) => state);
 
   const fetchData = async (id) => {
     try {
@@ -43,8 +48,9 @@ function ProductDetails() {
     console.log(selectedSize);
   };
   const changeDelivery = (event) => {
-    setSelectedDelivery(event.target.value);
+    // setSelectedDelivery(event.target.value);
     console.log(selectedDelivery);
+    dispatch(counterAction.deliveryMethod(event.target.value));
   };
   const plusQty = () => {
     const newQty = qty + 1;
@@ -54,6 +60,12 @@ function ProductDetails() {
     if (qty === 0) return;
     const newQty = qty - 1;
     setQty(newQty);
+  };
+
+  const addtoCartHandler = () => {
+    const subtotal = dataProduct.price * qty;
+    const cart = { id, selectedSize, qty, subtotal };
+    dispatch(counterAction.addtoCart(cart));
   };
 
   return (
@@ -91,7 +103,10 @@ function ProductDetails() {
                   <p className="font-medium text-2xl md:text-4xl mb-8">
                     IDR {dataProduct.price.toLocaleString("id-ID")}
                   </p>
-                  <button className="btn text-2xl text-white bg-secondary w-full h-20 rounded-2xl mb-6">
+                  <button
+                    onClick={addtoCartHandler}
+                    className="btn text-2xl text-white bg-secondary w-full h-20 rounded-2xl mb-6"
+                  >
                     Add to Cart
                   </button>
                   <button className="btn text-2xl text-secondary bg-primary w-full h-20 rounded-2xl">
@@ -159,6 +174,7 @@ function ProductDetails() {
                         id="dine"
                         value="dine"
                         onChange={changeDelivery}
+                        checked={selectedDelivery}
                       />
                       <span></span>
                       <h5>Dine in</h5>
@@ -170,6 +186,7 @@ function ProductDetails() {
                         id="door"
                         value="door"
                         onChange={changeDelivery}
+                        checked={selectedDelivery}
                       />
                       <span></span>
                       <h5>Door Delivery</h5>
@@ -181,6 +198,7 @@ function ProductDetails() {
                         id="pick"
                         value="pick"
                         onChange={changeDelivery}
+                        checked={selectedDelivery}
                       />
                       <span></span>
                       <h5>Pick up</h5>
