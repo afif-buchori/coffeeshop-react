@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import OrderProduct from "./orderProduct";
+import OrderProduct from "./OrderProduct";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loader";
+import NothingCart from "./NothingCart";
 
 function YourCart() {
   const cartState = useSelector((state) => state.counter);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(cartState);
+
+  const onCart = cartState.shoppingCart;
+  let subtotalOnCart = 0;
+  cartState.shoppingCart.forEach((prod) => {
+    subtotalOnCart += prod.subtotal;
+  });
+  const taxFee = subtotalOnCart * 0.05;
+  const shipping = 10000;
+  const grandTotal = subtotalOnCart + taxFee;
+  // console.log(cartState);
   console.log(isLoading, setIsLoading);
+  // console.log(subtotalOnCart);
+  // console.log(taxFee);
   return (
     <>
       <Header title="yourcart" />
@@ -28,20 +40,33 @@ function YourCart() {
                   Order Summary
                 </h2>
 
-                <OrderProduct />
+                {cartState.shoppingCart.length < 1 ? (
+                  <NothingCart />
+                ) : (
+                  onCart.map((product) => (
+                    <OrderProduct
+                      key={product.id}
+                      img={product.img}
+                      prodName={product.prodName}
+                      size={product.selectedSize}
+                      qty={product.qty}
+                      subtotal={product.subtotal}
+                    />
+                  ))
+                )}
 
                 <hr className="border border-grey mb-5" />
                 <p className="flex justify-between">
                   {/* SUBTOTAL <span>IDR {cartState.shoppingCart[0].subtotal}</span> */}
                 </p>
                 <p className="flex justify-between">
-                  TAX & FEES <span>IDR 20.000</span>
+                  TAX & FEES <span>IDR {taxFee.toLocaleString("id-ID")}</span>
                 </p>
                 <p className="flex justify-between">
-                  SHIPPING <span>IDR 10.000</span>
+                  SHIPPING <span>IDR {shipping.toLocaleString("id-ID")}</span>
                 </p>
                 <h5 className="font-bold text-xl flex justify-between mt-4">
-                  TOTAL <span>IDR 150.000</span>
+                  TOTAL <span>IDR {grandTotal.toLocaleString("id-ID")}</span>
                 </h5>
               </div>
 

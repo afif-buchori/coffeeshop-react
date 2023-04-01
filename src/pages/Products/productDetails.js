@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import DataNotFound from "../../components/DataNotFound";
 import Footer from "../../components/Footer";
@@ -13,6 +13,7 @@ import { counterAction } from "../../redux/slices/counter";
 function ProductDetails() {
   const controller = React.useMemo(() => new AbortController(), []);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [isNotFound, setIsNotFound] = useState(true);
@@ -22,7 +23,7 @@ function ProductDetails() {
   const [qty, setQty] = useState(1);
   const [selectedSize, setSelectedSize] = useState("Regular");
   // const [selectedDelivery, setSelectedDelivery] = useState("dine in");
-  const selectedDelivery = useSelector((state) => state);
+  const selectedDelivery = useSelector((state) => state.counter.delivery);
 
   const fetchData = async (id) => {
     try {
@@ -49,7 +50,7 @@ function ProductDetails() {
   };
   const changeDelivery = (event) => {
     // setSelectedDelivery(event.target.value);
-    console.log(selectedDelivery);
+    // console.log(selectedDelivery);
     dispatch(counterAction.deliveryMethod(event.target.value));
   };
   const plusQty = () => {
@@ -64,10 +65,18 @@ function ProductDetails() {
 
   const addtoCartHandler = () => {
     const subtotal = dataProduct.price * qty;
-    const cart = { id, selectedSize, qty, subtotal };
+    const img = dataProduct.image;
+    const prodName = dataProduct.prod_name;
+    const cart = { id, img, prodName, selectedSize, qty, subtotal };
     dispatch(counterAction.addtoCart(cart));
   };
 
+  const checkoutHandler = () => {
+    addtoCartHandler();
+    navigate("/yourcart");
+  };
+
+  console.log(selectedDelivery);
   return (
     <>
       <Header title="products" />
@@ -174,7 +183,7 @@ function ProductDetails() {
                         id="dine"
                         value="dine"
                         onChange={changeDelivery}
-                        checked={selectedDelivery}
+                        checked={selectedDelivery === "dine"}
                       />
                       <span></span>
                       <h5>Dine in</h5>
@@ -186,7 +195,7 @@ function ProductDetails() {
                         id="door"
                         value="door"
                         onChange={changeDelivery}
-                        checked={selectedDelivery}
+                        checked={selectedDelivery === "door"}
                       />
                       <span></span>
                       <h5>Door Delivery</h5>
@@ -198,7 +207,7 @@ function ProductDetails() {
                         id="pick"
                         value="pick"
                         onChange={changeDelivery}
-                        checked={selectedDelivery}
+                        checked={selectedDelivery === "pick"}
                       />
                       <span></span>
                       <h5>Pick up</h5>
@@ -253,7 +262,10 @@ function ProductDetails() {
                   </button>
                 </div>
               </div>
-              <button className="btn md:w-80 h-20 md:h-auto rounded-2xl bg-primary">
+              <button
+                onClick={checkoutHandler}
+                className="btn md:w-80 h-20 md:h-auto rounded-2xl bg-primary"
+              >
                 CHECKOUT
               </button>
             </div>

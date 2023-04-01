@@ -23,12 +23,7 @@ const userSlice = createSlice({
       };
     },
     authLogout: () => {
-      return {
-        isLogin: false,
-        id: null,
-        role: null,
-        token: null,
-      };
+      return initialState;
     },
   },
 });

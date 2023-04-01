@@ -7,6 +7,7 @@ import Loader from "../../components/Loader";
 // import imgUserDefault from "../../assets/user-default.png";
 import { getUser, updateDataUser } from "../../utils/https/auth";
 import { userAction } from "../../redux/slices/auth";
+import { counterAction } from "../../redux/slices/counter";
 import { useNavigate } from "react-router-dom";
 import ChangePwd from "./changePwd";
 
@@ -64,6 +65,7 @@ function Profile() {
 
   const handleLogout = () => {
     dispatch(userAction.authLogout());
+    dispatch(counterAction.resetCounter());
     navigate("/", { replace: true });
   };
 
