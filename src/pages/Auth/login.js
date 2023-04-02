@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../utils/https/auth";
+// import { login } from "../../utils/https/auth";
 // import { save } from "../../utils/localStorage";
 
 import { useDispatch } from "react-redux";
@@ -31,18 +31,33 @@ function Login() {
 
   const loginHandler = (event) => {
     event.preventDefault();
-    login(form.email, form.password, controller)
-      .then((res) => {
-        // console.log(res.data);
-        dispatch(userAction.authLogin(res.data));
-        // const key = "coffeeShop-token";
-        // save(key, res.data.token);
-        navigate("/", {
-          replace: true,
-        });
-      })
-      .catch((err) => console.log(err));
+    dispatch(
+      userAction.loginThunk(
+        { email: form.email, password: form.password },
+        controller
+      )
+    ).then((result) => {
+      if (result.payload && result.payload.token) {
+        navigate("/");
+      }
+    });
+
+    // login(form.email, form.password, controller)
+    //   .then((res) => {
+    //     // console.log(res.data);
+    //     dispatch(userAction.authLogin(res.data));
+    //     // const key = "coffeeShop-token";
+    //     // save(key, res.data.token);
+    //     navigate("/", {
+    //       replace: true,
+    //     });
+    //   })
+    //   .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    document.title = "Coffee - Login";
+  }, []);
 
   return (
     <>

@@ -1,12 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { login } from "../../utils/https/auth";
 
 const initialState = {
   isLogin: false,
-  id: null,
-  image: null,
-  role: null,
+  // id: null,
+  // image: null,
+  // role: null,
   token: null,
+  data: null,
+  isLoading: false,
+  isRejected: false,
+  isFulfilled: false,
+  err: null,
 };
+
+const loginThunk = createAsyncThunk(
+  "user/post",
+  async ({ email, password }, controller) => {
+    try {
+      const response = await login(email, password, controller);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -26,7 +45,44 @@ const userSlice = createSlice({
       return initialState;
     },
   },
+  extraReducers: {
+    [loginThunk.pending]: (prevState) => {
+      return {
+        ...prevState,
+        isLoading: true,
+        isRejected: false,
+        isFulfilled: false,
+      };
+    },
+    [loginThunk.fulfilled]: (prevState, action) => {
+      // const wrong = action.payload.response.status;
+      // return {
+      //   ...prevState,
+      //   isLoading: false,
+      //   isFulfilled: true,
+      //   token: wrong ? null : action.payload.token,
+      //   data: wrong ? null : action.payload.dataUser,
+      //   isLogin: wrong ? false : true,
+      // };
+      return {
+        ...prevState,
+        isLoading: false,
+        isFulfilled: true,
+        token: action.payload.token,
+        data: action.payload.dataUser,
+        isLogin: true,
+      };
+    },
+    [loginThunk.rejected]: (prevState, action) => {
+      return {
+        ...prevState,
+        isLoading: false,
+        isRejected: true,
+        err: action.payload,
+      };
+    },
+  },
 });
 
-export const userAction = userSlice.actions;
+export const userAction = { ...userSlice.actions, loginThunk };
 export default userSlice.reducer;

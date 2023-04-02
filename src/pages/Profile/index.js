@@ -9,7 +9,7 @@ import { getUser, updateDataUser } from "../../utils/https/auth";
 import { userAction } from "../../redux/slices/auth";
 import { counterAction } from "../../redux/slices/counter";
 import { useNavigate } from "react-router-dom";
-import ChangePwd from "./changePwd";
+import ChangePwd from "./ChangePwd";
 
 function Profile() {
   const controller = useMemo(() => new AbortController(), []);
@@ -77,7 +77,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    fetchDataUser(state.id);
+    fetchDataUser(state.data.id);
   }, []);
 
   // console.log(dataUser);

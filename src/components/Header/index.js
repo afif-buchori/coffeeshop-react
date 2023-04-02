@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Authentication from "./authentication";
-import Account from "./account";
+import Authentication from "./Authentication";
+import Account from "./Account";
 
 import logoBrand from "../../assets/icon/logo.svg";
 import toggleNav from "../../assets/icon/toggle-menu.svg";
@@ -11,8 +11,8 @@ import { useSelector } from "react-redux";
 
 export function Header(props) {
   // const state = useSelector((state) => state);
-  const state = useSelector((state) => state);
-  const [isLogin] = useState(state.user.isLogin);
+  const stateStore = useSelector((state) => state.user);
+  // const [isLogin] = useState(state.user.isLogin);
   const [toggleActive, setToggleActive] = useState(false);
 
   const handleToggle = () => {
@@ -65,7 +65,7 @@ export function Header(props) {
         <div
           className={toggleActive ? "account right-0" : "account right-[-150%]"}
         >
-          {isLogin ? (
+          {stateStore.token ? (
             <Account searchValue={props.searchValue} />
           ) : (
             <Authentication />
