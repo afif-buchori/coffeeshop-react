@@ -2,22 +2,22 @@ import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import OrderProduct from "./OrderProduct";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import NothingCart from "./NothingCart";
 
-// import { counterAction } from "../../redux/slices/counter";
+import { counterAction } from "../../redux/slices/counter";
 import ModalMsg from "../../components/ModalMgs";
 import { addTransactions } from "../../utils/https/products";
 
 function YourCart() {
   const controller = useMemo(() => new AbortController(), []);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const cartState = state.counter;
   const userState = state.user.data;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(userState === null ? true : false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [payMethod, setPayMethod] = useState(0);
 
@@ -51,7 +51,7 @@ function YourCart() {
       console.log(error);
       setIsLoading(false);
     }
-    // dispatch(counterAction.resetCounter());
+    dispatch(counterAction.resetCounter());
   };
 
   const handleCloseModal = () => {

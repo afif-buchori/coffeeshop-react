@@ -26,9 +26,8 @@ function ProductDetails() {
   const [dataProduct, setDataProduct] = useState();
   const [qty, setQty] = useState(1);
   const [selectedSize, setSelectedSize] = useState(1);
-  // const [selectedDelivery, setSelectedDelivery] = useState("dine in");
   const selectedDelivery = useSelector((state) => state.counter.delivery);
-  // const notes = useSelector((state) => state.counter.notes);
+  const notes = useSelector((state) => state.counter.notes);
 
   const fetchData = async (id) => {
     try {
@@ -250,6 +249,7 @@ function ProductDetails() {
                       type="text"
                       id="time"
                       name="note"
+                      value={notes}
                       onChange={noteHandler}
                       placeholder="Enter the time you'll arrived"
                       className="w-56 bg-transparent text border-b-2 border-secondary py-1 px-1"

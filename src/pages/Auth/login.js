@@ -10,12 +10,15 @@ import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
 import Footer from "../../components/Footer";
 import Loader from "../../components/Loader";
+import ModalMgs from "../../components/ModalMgs";
 
 function Login() {
   const controller = useMemo(() => new AbortController(), []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [isWrong, setIsWrong] = useState(false);
+  const [msg, setMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -33,18 +36,31 @@ function Login() {
 
   const loginHandler = (event) => {
     event.preventDefault();
+    if (form.email === "" || form.password === "") {
+      setMsg("Input Empty !");
+      setIsWrong(true);
+      return;
+    }
     setIsLoading(true);
     dispatch(
       userAction.loginThunk(
         { email: form.email, password: form.password },
         controller
       )
-    ).then((result) => {
-      if (result.payload && result.payload.token) {
-        setIsLoading(false);
-        navigate("/");
-      }
-    });
+    )
+      .then((result) => {
+        if (result.payload.response.status === 401) {
+          setIsLoading(false);
+          setMsg("Email / Password is Invalid !");
+          setIsWrong(true);
+          setForm({ ...form, password: "" });
+        }
+        if (result.payload && result.payload.token) {
+          setIsLoading(false);
+          navigate("/");
+        }
+      })
+      .catch((err) => console.log(err));
 
     // login(form.email, form.password, controller)
     //   .then((res) => {
@@ -155,6 +171,7 @@ function Login() {
           </div>
         </section>
       </div>
+      <ModalMgs isOpen={isWrong} onClose={() => setIsWrong(false)} msg={msg} />
       {isLoading && (
         <div className="w-screen h-screen flex justify-center items-center fixed z-50 top-0 left-0 bg-slate-800/80">
           <Loader />
