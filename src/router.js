@@ -28,7 +28,22 @@ const router = createBrowserRouter([
       </PublicRoute>
     ),
   },
-  { path: "/signup", element: <Signup /> },
+  {
+    path: "/signup",
+    element: (
+      <PublicRoute>
+        <Signup />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/forgotpwd",
+    element: (
+      <PublicRoute>
+        <ForgotPassword />
+      </PublicRoute>
+    ),
+  },
   { path: "/products", element: <Products /> },
   { path: "/products/:id", element: <ProductDetails /> },
   {
@@ -39,9 +54,22 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
-  { path: "/yourcart", element: <YourCart /> },
-  { path: "/history", element: <History /> },
-  { path: "/forgotpwd", element: <ForgotPassword /> },
+  {
+    path: "/yourcart",
+    element: (
+      <PrivateRoute>
+        <YourCart />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/history",
+    element: (
+      <PrivateRoute>
+        <History />
+      </PrivateRoute>
+    ),
+  },
 ]);
 
 export default router;

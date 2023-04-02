@@ -4,8 +4,8 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15,14 +15,14 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 @layer base {
   * {
     /* font-family: 'Poppins', sans-serif; */
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
   }
   html {
     scroll-behavior: smooth;
@@ -40,20 +40,22 @@ code {
     @apply h-14 md:h-[75px] border border-black rounded-2xl px-3 md:px-6;
   }
 
-  .input-line[type=text]:focus {
+  .input-line[type="text"]:focus {
     @apply border-none;
     outline-style: none;
     margin-bottom: -3px;
-    border-bottom: 3px solid #6A4029;
+    border-bottom: 3px solid #6a4029;
   }
 
-  .input input, .input textarea {
+  .input input,
+  .input textarea {
     @apply border-none text-greydark;
     outline-style: none;
     margin-bottom: -2px;
     border-bottom: 2px solid black;
   }
-  .input input:focus, .input textarea:focus {
+  .input input:focus,
+  .input textarea:focus {
     @apply text-black border-b-2 border-primary;
   }
 
@@ -64,14 +66,15 @@ code {
     @apply h-4 w-4 rounded-full bg-primary block relative left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-0;
     content: "";
   }
-  .input-data-radio input[type=radio]:checked ~ span::after {
+  .input-data-radio input[type="radio"]:checked ~ span::after {
     @apply scale-100;
   }
-  .input-data-radio input[type=radio]:checked ~ label {
+  .input-data-radio input[type="radio"]:checked ~ label {
     @apply font-bold text-secondary;
   }
 
-  .choose-size input, .delivery-method input {
+  .choose-size input,
+  .delivery-method input {
     @apply hidden;
   }
   .choose-size {
@@ -82,7 +85,7 @@ code {
     transform: scale(0);
     transition: 0.15s linear;
   }
-  .choose-size input[type=radio]:checked + span {
+  .choose-size input[type="radio"]:checked + span {
     @apply scale-100;
   }
 
@@ -93,10 +96,10 @@ code {
     @apply absolute w-full h-0 top-0 left-0 bg-secondary;
     transition: 0.1s linear;
   }
-  .delivery-method input[type=radio]:checked + span {
+  .delivery-method input[type="radio"]:checked + span {
     @apply h-full;
   }
-  .delivery-method input[type=radio]:checked ~ h5 {
+  .delivery-method input[type="radio"]:checked ~ h5 {
     @apply text-white font-bold relative;
   }
 
@@ -113,7 +116,7 @@ code {
   .nav-search input {
     @apply w-full h-8 pl-2 pr-3 bg-transparent;
   }
-  
+
   .navbar {
     @apply absolute top-32 w-full md:w-auto pr-10 md:pr-0 py-5 md:py-0 md:static flex flex-col md:flex-row bg-white md:bg-transparent items-end md:items-center justify-center gap-6 md:gap-10 border-b md:border-b-0 border-grey shadow-2xl shadow-slate-500 md:shadow-none;
     transition: 0.2s linear;
@@ -126,9 +129,9 @@ code {
     @apply text-greydark cursor-pointer;
   }
   .navlink::after {
-    content: '';
+    content: "";
     display: block;
-    border-bottom: 2px solid #6A4029;
+    border-bottom: 2px solid #6a4029;
     transform: scale(0);
     transition: 0.15s linear;
   }
@@ -160,32 +163,39 @@ code {
 
   .btn::after {
     @apply absolute w-full h-full;
-    content: '';
+    content: "";
     display: block;
     background-color: #ffffff40;
     transform: scaleX(0);
     transition: 0.15s linear;
   }
-  
+
   .btn:hover::after {
     transform: scaleX(100%);
   }
-  
-  .hero, .hero-auth {
+
+  .hero,
+  .hero-auth {
     background-size: cover;
     background-position: center;
   }
   .hero {
     background-image: url(../assets/banner-home.jpeg.webp);
+    background-size: cover;
+    background-position: center;
   }
   .hero-auth {
     background-image: url(../assets/banner.jpeg.webp);
   }
   .hero-profile {
     background-image: url(../assets/banner-profile.jpeg.webp);
+    background-size: cover;
+    background-position: center;
   }
   .hero-history {
     background-image: url(../assets/history.webp);
+    background-size: cover;
+    background-position: center;
   }
   .hero-transaction {
     background-image: url(../assets/banner-transactions.webp);
@@ -230,12 +240,12 @@ code {
     @apply border-secondary shadow-sm shadow-secondary;
   }
 
-
   .page-dot {
     @apply w-4 h-4 rounded-full bg-grey cursor-pointer;
     transition: 0.15s linear;
   }
-  .page-dot:hover, .page-dot-active {
+  .page-dot:hover,
+  .page-dot-active {
     @apply w-11 bg-secondary;
   }
   .page-arrow {
@@ -251,4 +261,33 @@ code {
     justify-self: center;
   }
 
+  .loading {
+    /* text-shadow: #fc0 4px 0 10px; */
+    @apply flex gap-5;
+  }
+  .loading span {
+    @apply w-8 h-8 rounded-full bg-primary border-4 border-secondary;
+    animation: loader 1.5s ease-in-out infinite;
+  }
+  @keyframes loader {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    35%,
+    65% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .loading span:last-child {
+    animation-delay: 0.6s;
+  }
+  .loading span:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .loading span:first-child {
+    animation-delay: 0.2s;
+  }
 }

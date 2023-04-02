@@ -1,14 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { register } from "../../utils/https/auth";
 
 import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
 import Footer from "../../components/Footer";
+import Loader from "../../components/Loader";
 
 function Login() {
   const controller = useMemo(() => new AbortController(), []);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -25,14 +27,20 @@ function Login() {
   };
 
   const registerHandler = (event) => {
+    setIsLoading(true);
     event.preventDefault();
     console.log(form);
     register(form.email, form.password, form.phone, controller)
       .then((res) => {
+        setIsLoading(false);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    document.title = "Coffee Shop - Sign Up";
+  }, []);
 
   return (
     <>
@@ -132,6 +140,12 @@ function Login() {
           </div>
         </section>
       </div>
+
+      {isLoading && (
+        <div className="w-screen h-screen flex justify-center items-center fixed z-50 top-0 left-0 bg-slate-800/80">
+          <Loader />
+        </div>
+      )}
       <Footer />
     </>
   );

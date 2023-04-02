@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   delivery: "",
+  notes: "",
   shoppingCart: [],
   // number: 0,
 };
@@ -25,13 +26,16 @@ const counterSlice = createSlice({
     deliveryMethod: (prevState, action) => {
       return { ...prevState, delivery: action.payload };
     },
+    notes: (prevState, action) => {
+      return { ...prevState, notes: action.payload };
+    },
     addtoCart: (prevState, action) => {
       // console.log(action.payload);
 
       const exsistIdx = prevState.shoppingCart.findIndex(
         (item) =>
-          item.id === action.payload.id &&
-          item.selectedSize === action.payload.selectedSize
+          item.product_id === action.payload.product_id &&
+          item.size_id === action.payload.size_id
       );
 
       if (exsistIdx !== -1) {

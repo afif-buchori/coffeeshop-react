@@ -9,6 +9,8 @@ import Loader from "../../components/Loader";
 
 import { getProductsDetails } from "../../utils/https/products";
 import { counterAction } from "../../redux/slices/counter";
+import ModalMsg from "../../components/ModalMgs";
+import ModaltoCart from "../../components/ModalMgs/ModaltoCart";
 
 function ProductDetails() {
   const controller = React.useMemo(() => new AbortController(), []);
@@ -17,13 +19,16 @@ function ProductDetails() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isNotFound, setIsNotFound] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalCart, setIsModalCart] = useState(false);
 
   const { id } = useParams();
   const [dataProduct, setDataProduct] = useState();
   const [qty, setQty] = useState(1);
-  const [selectedSize, setSelectedSize] = useState("Regular");
+  const [selectedSize, setSelectedSize] = useState(1);
   // const [selectedDelivery, setSelectedDelivery] = useState("dine in");
   const selectedDelivery = useSelector((state) => state.counter.delivery);
+  // const notes = useSelector((state) => state.counter.notes);
 
   const fetchData = async (id) => {
     try {
@@ -41,12 +46,16 @@ function ProductDetails() {
   };
 
   useEffect(() => {
+    document.title = "Coffee Shop - Product Details";
     fetchData(id);
   }, [id]);
 
   const changeSize = (event) => {
     setSelectedSize(event.target.value);
     console.log(selectedSize);
+  };
+  const noteHandler = (event) => {
+    dispatch(counterAction.notes(event.target.value));
   };
   const changeDelivery = (event) => {
     // setSelectedDelivery(event.target.value);
@@ -67,16 +76,32 @@ function ProductDetails() {
     const subtotal = dataProduct.price * qty;
     const img = dataProduct.image;
     const prodName = dataProduct.prod_name;
-    const cart = { id, img, prodName, selectedSize, qty, subtotal };
+    const cart = {
+      product_id: parseInt(id),
+      img,
+      prodName,
+      size_id: parseInt(selectedSize),
+      qty,
+      subtotal,
+    };
     dispatch(counterAction.addtoCart(cart));
+    setIsModalCart(true);
   };
 
   const checkoutHandler = () => {
+    if (selectedDelivery.length < 1) return setIsModalOpen(true);
     addtoCartHandler();
     navigate("/yourcart");
   };
 
-  console.log(selectedDelivery);
+  const handleCloseCart = () => {
+    setIsModalCart(false);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  console.log(selectedSize);
   return (
     <>
       <Header title="products" />
@@ -92,9 +117,8 @@ function ProductDetails() {
             <div className="w-4/5 flex flex-col max-width">
               <ul className="flex mt-10">
                 <li>Favorite & Promo</li>
-                <li className="font-bold text-secondary">
-                  <i className="bi bi-caret-right-fill"></i>
-                  {dataProduct.prod_name}
+                <li className="font-bold text-secondary ml-1">
+                  &gt; {dataProduct.prod_name}
                 </li>
               </ul>
               <div className="flex flex-col md:flex-row w-full mb-60 md:mb-44 md:gap-16 xl:gap-20 justify-center">
@@ -118,6 +142,11 @@ function ProductDetails() {
                   >
                     Add to Cart
                   </button>
+                  <ModaltoCart
+                    msg={dataProduct.prod_name}
+                    isOpen={isModalCart}
+                    onClose={handleCloseCart}
+                  />
                   <button className="btn text-2xl text-secondary bg-primary w-full h-20 rounded-2xl">
                     Ask a Staff
                   </button>
@@ -144,7 +173,7 @@ function ProductDetails() {
                           type="radio"
                           name="size"
                           id="r"
-                          value="Regular"
+                          value={1}
                           onChange={changeSize}
                         />
                         R<span></span>
@@ -154,7 +183,7 @@ function ProductDetails() {
                           type="radio"
                           name="size"
                           id="l"
-                          value="Large"
+                          value={2}
                           onChange={changeSize}
                         />
                         L<span></span>
@@ -164,7 +193,7 @@ function ProductDetails() {
                           type="radio"
                           name="size"
                           id="xl"
-                          value="Extra Large"
+                          value={3}
                           onChange={changeSize}
                         />
                         XL
@@ -181,9 +210,9 @@ function ProductDetails() {
                         type="radio"
                         name="delivery-method"
                         id="dine"
-                        value="dine"
+                        value={1}
                         onChange={changeDelivery}
-                        checked={selectedDelivery === "dine"}
+                        checked={selectedDelivery == 1}
                       />
                       <span></span>
                       <h5>Dine in</h5>
@@ -193,9 +222,9 @@ function ProductDetails() {
                         type="radio"
                         name="delivery-method"
                         id="door"
-                        value="door"
+                        value={2}
                         onChange={changeDelivery}
-                        checked={selectedDelivery === "door"}
+                        checked={selectedDelivery == 2}
                       />
                       <span></span>
                       <h5>Door Delivery</h5>
@@ -205,9 +234,9 @@ function ProductDetails() {
                         type="radio"
                         name="delivery-method"
                         id="pick"
-                        value="pick"
+                        value={3}
                         onChange={changeDelivery}
-                        checked={selectedDelivery === "pick"}
+                        checked={selectedDelivery == 3}
                       />
                       <span></span>
                       <h5>Pick up</h5>
@@ -220,6 +249,8 @@ function ProductDetails() {
                     <input
                       type="text"
                       id="time"
+                      name="note"
+                      onChange={noteHandler}
                       placeholder="Enter the time you'll arrived"
                       className="w-56 bg-transparent text border-b-2 border-secondary py-1 px-1"
                     />
@@ -243,7 +274,13 @@ function ProductDetails() {
                     {dataProduct.prod_name}
                   </h5>
                   <p className="text-xs md:text-base">
-                    x{qty} ({selectedSize})
+                    x{qty} (
+                    {selectedSize == 3
+                      ? "Extra Large"
+                      : selectedSize == 2
+                      ? "Large"
+                      : "Regular"}
+                    )
                   </p>
                 </div>
                 <div className="flex items-center gap-8">
@@ -268,6 +305,11 @@ function ProductDetails() {
               >
                 CHECKOUT
               </button>
+              <ModalMsg
+                msg="Delivery Method Not Selected"
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+              />
             </div>
           </section>
         </>

@@ -9,12 +9,14 @@ import { userAction } from "../../redux/slices/auth";
 import logoBrand from "../../assets/icon/logo.svg";
 import logoGoogle from "../../assets/icon/icon-google.svg";
 import Footer from "../../components/Footer";
+import Loader from "../../components/Loader";
 
 function Login() {
   const controller = useMemo(() => new AbortController(), []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -31,6 +33,7 @@ function Login() {
 
   const loginHandler = (event) => {
     event.preventDefault();
+    setIsLoading(true);
     dispatch(
       userAction.loginThunk(
         { email: form.email, password: form.password },
@@ -38,6 +41,7 @@ function Login() {
       )
     ).then((result) => {
       if (result.payload && result.payload.token) {
+        setIsLoading(false);
         navigate("/");
       }
     });
@@ -56,7 +60,7 @@ function Login() {
   };
 
   useEffect(() => {
-    document.title = "Coffee - Login";
+    document.title = "Coffee Shop - Login";
   }, []);
 
   return (
@@ -151,6 +155,11 @@ function Login() {
           </div>
         </section>
       </div>
+      {isLoading && (
+        <div className="w-screen h-screen flex justify-center items-center fixed z-50 top-0 left-0 bg-slate-800/80">
+          <Loader />
+        </div>
+      )}
       <Footer />
     </>
   );

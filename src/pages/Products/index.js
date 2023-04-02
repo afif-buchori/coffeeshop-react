@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import withSearchParams from "../../utils/wrapper/withParams";
 import withNavigate from "../../utils/wrapper/withNavigate";
 
-import CardProducts from "./cardProducts";
+import CardProducts from "./CardProducts";
 // import axios from "axios";
 import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
@@ -68,6 +68,7 @@ export class Products extends Component {
   };
 
   componentDidMount() {
+    document.title = "Coffee Shop - Products";
     this.fetchData();
   }
 

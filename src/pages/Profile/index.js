@@ -77,6 +77,7 @@ function Profile() {
   };
 
   useEffect(() => {
+    document.title = "Coffee Shop - Profile";
     fetchDataUser(state.data.id);
   }, []);
 

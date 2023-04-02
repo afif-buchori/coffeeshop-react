@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Footer from "../../components/Footer";
 import { forgot, setPassbyForgot } from "../../utils/https/auth";
+import Loader from "../../components/Loader";
 
 function ForgotPassword() {
   const controller = useMemo(() => new AbortController(), []);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const [form, setForm] = useState({
@@ -17,10 +19,12 @@ function ForgotPassword() {
   };
 
   const emailSubmitHandler = (event) => {
+    setIsLoading(true);
     event.preventDefault();
     console.log(email);
     forgot(email, controller)
       .then((res) => {
+        setIsLoading(false);
         console.log(res.data);
         setTimeLeft(120);
       })
@@ -28,6 +32,7 @@ function ForgotPassword() {
   };
 
   useEffect(() => {
+    document.title = "Coffee Shop - Forgot Password";
     const interval = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
@@ -46,10 +51,12 @@ function ForgotPassword() {
     });
   };
   const otpSubmitHandler = (event) => {
+    setIsLoading(true);
     event.preventDefault();
     console.log(form);
     setPassbyForgot(email, form.code_otp, form.password, controller)
       .then((res) => {
+        setIsLoading(false);
         console.log(res);
         setTimeLeft(0);
       })
@@ -150,6 +157,11 @@ function ForgotPassword() {
           </form>
         )}
       </section>
+      {isLoading && (
+        <div className="w-screen h-screen flex justify-center items-center fixed z-50 top-0 left-0 bg-slate-800/80">
+          <Loader />
+        </div>
+      )}
       <Footer />
     </>
   );
