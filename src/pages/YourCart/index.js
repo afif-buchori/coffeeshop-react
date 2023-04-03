@@ -8,7 +8,7 @@ import NothingCart from "./NothingCart";
 
 import { counterAction } from "../../redux/slices/counter";
 import ModalMsg from "../../components/ModalMgs";
-import { addTransactions } from "../../utils/https/products";
+import { addTransactions } from "../../utils/https/transaction";
 
 function YourCart() {
   const controller = useMemo(() => new AbortController(), []);
@@ -68,7 +68,8 @@ function YourCart() {
     subtotalOnCart += prod.subtotal;
   });
   const taxFee = subtotalOnCart * 0.05;
-  const shipping = 10000;
+  let shipping = cartState.delivery == 2 ? 10000 : 0;
+  // if (cartState.delivery == 2) shipping = 10000;
   const grandTotal = subtotalOnCart + taxFee + shipping;
   // console.log(cartState);
   // console.log(subtotalOnCart);

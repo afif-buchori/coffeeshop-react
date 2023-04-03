@@ -49,12 +49,13 @@ function Login() {
       )
     )
       .then((result) => {
-        if (result.payload.response.status === 401) {
+        if (result.payload.message === "Request failed with status code 401") {
           setIsLoading(false);
           setMsg("Email / Password is Invalid !");
           setIsWrong(true);
           setForm({ ...form, password: "" });
         }
+        console.log(result);
         if (result.payload && result.payload.token) {
           setIsLoading(false);
           navigate("/");

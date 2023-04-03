@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { login } from "../../utils/https/auth";
 
 const initialState = {
-  isLogin: false,
+  // isLogin: false,
   // id: null,
   // image: null,
   // role: null,
@@ -68,9 +68,9 @@ const userSlice = createSlice({
         ...prevState,
         isLoading: false,
         isFulfilled: true,
-        token: action.payload.token,
-        data: action.payload.dataUser,
-        isLogin: true,
+        token: action.payload.token || null,
+        data: action.payload.dataUser || null,
+        // isLogin: true,
       };
     },
     [loginThunk.rejected]: (prevState, action) => {

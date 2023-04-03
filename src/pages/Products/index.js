@@ -11,6 +11,7 @@ import CardProducts from "./CardProducts";
 import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
 import DataNotFound from "../../components/DataNotFound";
+import PromosSection from "./PromosSection";
 
 export class Products extends Component {
   constructor(props) {
@@ -258,39 +259,7 @@ export class Products extends Component {
 
           {/* <!-- PROMO SIDE --> */}
           <div className="md:w-[35%] md:min-w-[400px] border-t md:border-t-0 md:border-r border-grey flex flex-col items-center">
-            <h1 className="text-2xl font-bold text-secondary mt-7">
-              Promo for you
-            </h1>
-            <p className="text-xs max-w-[240px] text-center my-11">
-              Coupons will be updated every weeks. Check them out!
-            </p>
-            {/* <!-- CARD PROMO --> */}
-            <div className="w-[284px] h-[472px] px-4 py-7 flex flex-col rounded-2xl justify-between items-center bg-[#FFCB65]">
-              <div className="w-32 h-32 rounded-full overflow-hidden">
-                <img src="../img/product/promo.png.webp" alt="" />
-              </div>
-              <h2 className="font-bold text-2xl">Beef Spaghetti</h2>
-              <h2 className="font-bold text-xl">20% OFF</h2>
-              <p className="text-sm text-center">
-                Buy 1 Choco Oreo and get 20% off for Beef Spaghetti
-              </p>
-              <hr className="border border-black border-dashed w-[111%]" />
-              <p className="">COUPON CODE</p>
-              <h3 className="font-bold text-3xl font-popins">FNPR15RG</h3>
-              <h4 className="text-xs">Valid untill October 10th 2020</h4>
-            </div>
-            <button className="btn w-[284px] h-16 text-white bg-secondary rounded-2xl mt-10 font-popins">
-              Apply Coupon
-            </button>
-            <div className="mt-28">
-              <h5 className="text-sm font-bold">Terms and Condition</h5>
-              <ol className="text-sm list-decimal list-inside">
-                <li>You can only apply 1 coupon per day</li>
-                <li>It only for dine in</li>
-                <li>Buy 1 get 1 only for new user</li>
-                <li>Should make member card to apply coupon</li>
-              </ol>
-            </div>
+            <PromosSection />
           </div>
         </main>
 

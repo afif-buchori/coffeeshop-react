@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import DataNotFound from "../../components/DataNotFound";
 import Footer from "../../components/Footer";
@@ -51,7 +51,7 @@ function ProductDetails() {
 
   const changeSize = (event) => {
     setSelectedSize(event.target.value);
-    console.log(selectedSize);
+    console.log(event.target.value);
   };
   const noteHandler = (event) => {
     dispatch(counterAction.notes(event.target.value));
@@ -100,7 +100,8 @@ function ProductDetails() {
     setIsModalOpen(false);
   };
 
-  console.log(selectedSize);
+  // console.log(selectedSize);
+  // console.log(dataProduct);
   return (
     <>
       <Header title="products" />
@@ -115,7 +116,7 @@ function ProductDetails() {
           <section className="flex justify-center w-full mt-14 md:mt-28 bg-slate-100">
             <div className="w-4/5 flex flex-col max-width">
               <ul className="flex mt-10">
-                <li>Favorite & Promo</li>
+                <Link to="/products">{dataProduct.category}</Link>
                 <li className="font-bold text-secondary ml-1">
                   &gt; {dataProduct.prod_name}
                 </li>

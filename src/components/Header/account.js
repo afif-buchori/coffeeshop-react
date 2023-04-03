@@ -30,7 +30,7 @@ export class Account extends Component {
 
   componentDidMount() {
     const state = store.getState();
-    const profilePicture = state.user.image;
+    const profilePicture = state.user.data.profile_picture;
     this.setState({
       imageProfile: profilePicture,
     });

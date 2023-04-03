@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { get } from "../localStorage";
+// import { get } from "../localStorage";
 import store from "../../redux/store";
 
 // eslint-disable-next-line no-undef
@@ -62,13 +62,23 @@ export const editPassword = (body, controller) => {
   });
 };
 
-export const checkToken = (controller) => {
-  const url = `${baseUrl}/auth/private`;
-  const token = get("coffeeShop-token");
-  return axios.get(url, {
+export const authLogout = (controller) => {
+  const url = `${baseUrl}/auth/logout`;
+  const storeToken = store.getState();
+  const token = storeToken.user.token;
+  return axios.delete(url, {
     signal: controller.signal,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { Authorization: `Bearer ${token}` },
   });
 };
+
+// export const checkToken = (controller) => {
+//   const url = `${baseUrl}/auth/private`;
+//   const token = get("coffeeShop-token");
+//   return axios.get(url, {
+//     signal: controller.signal,
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+// };

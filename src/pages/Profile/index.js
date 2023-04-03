@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
 // import imgUserDefault from "../../assets/user-default.png";
-import { getUser, updateDataUser } from "../../utils/https/auth";
+import { authLogout, getUser, updateDataUser } from "../../utils/https/auth";
 import { userAction } from "../../redux/slices/auth";
 import { counterAction } from "../../redux/slices/counter";
 import { useNavigate } from "react-router-dom";
@@ -63,10 +63,20 @@ function Profile() {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(userAction.authLogout());
-    dispatch(counterAction.resetCounter());
-    navigate("/", { replace: true });
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      const result = await authLogout(controller);
+      if (result.status === 200) {
+        console.log(result);
+        dispatch(userAction.authLogout());
+        dispatch(counterAction.resetCounter());
+        setIsLoading(false);
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEditPwd = () => {
@@ -81,7 +91,12 @@ function Profile() {
     fetchDataUser(state.data.id);
   }, []);
 
-  // console.log(dataUser);
+  // console.log(dataUser.birth_date);
+  // new Date(dataUser.birth_date)
+  //                             .toISOString()
+  //                             .slice(0, 10) || ""
+
+  // console.log(new Date(dataUser.birth_date).toISOString());
 
   return (
     <>
@@ -269,11 +284,14 @@ function Profile() {
                           type="date"
                           id="birthDate"
                           name="birth_date"
-                          // value={birthDate}
+                          // value="1992-06-08"
                           value={
                             new Date(dataUser.birth_date)
                               .toISOString()
                               .slice(0, 10) || ""
+                            // new Date(dataUser.birth_date).toLocaleDateString(
+                            //   "id-ID"
+                            // )
                           }
                           onChange={handleForm}
                           className="h-14"

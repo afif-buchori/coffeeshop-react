@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardHistory from "./CardHistory";
 import { useSelector } from "react-redux";
-import { getHistory } from "../../utils/https/products";
+import { getHistory } from "../../utils/https/transaction";
 import Loader from "../../components/Loader";
 
 function History() {
