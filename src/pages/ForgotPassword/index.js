@@ -110,7 +110,7 @@ function ForgotPassword() {
           ""
         ) : (
           <form className="w-full px-[5%] md:px-0 md:w-4/5 max-width flex flex-col items-center">
-            <p className="text-white text-3xl font-bold">
+            <p className="count-down text-white text-3xl font-bold">
               {`${minutes}:${seconds}`}
             </p>
             <div className="w-full flex flex-col md:flex-row gap-9 my-8 md:my-12">

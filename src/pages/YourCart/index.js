@@ -9,6 +9,7 @@ import NothingCart from "./NothingCart";
 import { counterAction } from "../../redux/slices/counter";
 import ModalMsg from "../../components/ModalMgs";
 import { addTransactions } from "../../utils/https/transaction";
+import ModaltoCart from "../../components/ModalMgs/ModaltoCart";
 
 function YourCart() {
   const controller = useMemo(() => new AbortController(), []);
@@ -19,6 +20,8 @@ function YourCart() {
 
   const [isLoading, setIsLoading] = useState(userState === null ? true : false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [msg, setMsg] = useState("");
   const [payMethod, setPayMethod] = useState(0);
 
   const changePayment = (event) => {
@@ -27,12 +30,23 @@ function YourCart() {
   };
 
   const submitHandler = async () => {
-    if (payMethod === 0) return setIsModalOpen(true);
+    if (cartState.shoppingCart.length < 1) {
+      setMsg("Nothing Products on Your Cart");
+      setIsModalOpen(true);
+      return;
+    }
+    if (payMethod === 0) {
+      setMsg("Payment Method Not Selected");
+      setIsModalOpen(true);
+      return;
+    }
+
     const dataShoppingCart = cartState.shoppingCart.map((item) => {
       const { img, prodName, ...newItem } = item;
       if (img || prodName) console.log("");
       return newItem;
     });
+
     const data = {
       promo_id: 1,
       delivery_id: cartState.delivery,
@@ -47,6 +61,7 @@ function YourCart() {
       const result = await addTransactions(data, controller);
       console.log(result);
       setIsLoading(false);
+      setIsConfirmed(true);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -199,8 +214,13 @@ function YourCart() {
                   Confirm and Pay
                 </button>
                 <ModalMsg
-                  msg="Payment Method Not Selected"
+                  msg={msg}
                   isOpen={isModalOpen}
+                  onClose={handleCloseModal}
+                />
+                <ModaltoCart
+                  msg="Transactions Confirmed..."
+                  isOpen={isConfirmed}
                   onClose={handleCloseModal}
                 />
               </div>

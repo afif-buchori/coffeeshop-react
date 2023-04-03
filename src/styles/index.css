@@ -261,8 +261,11 @@ code {
     justify-self: center;
   }
 
-  .loading {
+  .count-down {
     /* text-shadow: #fc0 4px 0 10px; */
+    text-shadow: rgb(10, 8, 0) 4px 0 10px;
+  }
+  .loading {
     @apply flex gap-5;
   }
   .loading span {

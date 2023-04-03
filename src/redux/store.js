@@ -16,6 +16,7 @@ import reducer from "./slices";
 const persistConfig = {
   key: "coffee_shop",
   storage,
+  // blacklist: ["user"]
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

@@ -143,7 +143,7 @@ function ProductDetails() {
                     Add to Cart
                   </button>
                   <ModaltoCart
-                    msg={dataProduct.prod_name}
+                    msg={dataProduct.prod_name + " Added..."}
                     isOpen={isModalCart}
                     onClose={handleCloseCart}
                   />

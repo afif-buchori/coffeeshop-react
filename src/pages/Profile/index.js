@@ -57,6 +57,16 @@ function Profile() {
     try {
       const result = await updateDataUser(profPict, form, controller);
       console.log(result);
+      if (result.status === 200) {
+        if (form.address) {
+          dispatch(userAction.updateAddress(form.address));
+        }
+        if (form.phone) {
+          dispatch(userAction.updatePhone(form.phone));
+        }
+        if (profPict !== "")
+          dispatch(userAction.updateImage(result.data.data[0].profile_picture));
+      }
       setIsLoading(false);
     } catch (error) {
       console.log(error);

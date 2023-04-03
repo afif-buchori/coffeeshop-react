@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { deleteTransaction } from "../../utils/https/transaction";
 
 function CardHistory(props) {
+  const controller = useMemo(() => new AbortController(), []);
   const [isAction, setIsAction] = useState(false);
 
   const handleCard = () => {
@@ -11,7 +13,25 @@ function CardHistory(props) {
     setIsAction(false);
   };
 
-  console.log(props);
+  const deleteHandle = async () => {
+    try {
+      console.log(props.transactionId, props.prodId, controller);
+      const result = await deleteTransaction(
+        props.transactionId,
+        props.prodId,
+        controller
+      );
+      // console.log(result);
+      if (result.status === 200) {
+        console.log("data terhapus");
+        props.onDelete();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // console.log(props);
   return (
     <div
       onClick={handleCard}
@@ -30,7 +50,7 @@ function CardHistory(props) {
         <h2 className="font-bold text-2xl">{props.name}</h2>
         <p className="text-secondary">
           IDR {props.price.toLocaleString("id-ID")}
-          <span className="ml-4">
+          {/* <span className="ml-4">
             ( x{props.qty}{" "}
             {props.size === 1
               ? "Regular "
@@ -38,13 +58,18 @@ function CardHistory(props) {
               ? "Large "
               : "Extra Large "}
             )
-          </span>
+          </span> */}
         </p>
-        <p className="text-secondary">Delivery Method {props.methodDeliv}</p>
+        <p className="text-secondary">
+          {props.methodDeliv} at {new Date(props.orderAt).toLocaleDateString()}
+        </p>
       </div>
       {isAction && (
         <div className="absolute -top-5 -right-5 flex gap-3">
-          <button className="btn w-10 h-10 rounded-full bg-secondary">
+          <button
+            onClick={deleteHandle}
+            className="btn w-10 h-10 rounded-full bg-secondary"
+          >
             <i className="bi bi-trash3 text-white text-lg"></i>
           </button>
           <button

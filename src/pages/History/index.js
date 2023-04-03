@@ -2,16 +2,21 @@ import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardHistory from "./CardHistory";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { getHistory } from "../../utils/https/transaction";
 import Loader from "../../components/Loader";
+import ModaltoCart from "../../components/ModalMgs/ModaltoCart";
 
 function History() {
   const controller = useMemo(() => new AbortController(), []);
-  const state = useSelector((state) => state.user);
+  // const state = useSelector((state) => state.user);
   const [dataHistory, setDataHistory] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isDelete, setIsDelete] = useState(false);
 
+  const handleDelete = () => {
+    setIsDelete(true);
+  };
   const fetchDataHistory = async () => {
     try {
       const result = await getHistory(controller);
@@ -24,9 +29,9 @@ function History() {
   useEffect(() => {
     document.title = "Coffee Shop - History";
     fetchDataHistory();
-  }, []);
-  console.log(state);
-  console.log(dataHistory);
+  }, [isDelete]);
+  // console.log(isDelete);
+  // console.log(dataHistory);
   return (
     <>
       <Header />
@@ -44,14 +49,23 @@ function History() {
               {dataHistory.map((product, idx) => (
                 <CardHistory
                   key={idx}
+                  prodId={product.product_id}
+                  transactionId={product.history_id}
                   name={product.prod_name}
                   image={product.image}
                   price={product.price}
-                  qty={product.qty}
-                  size={product.size_id}
                   methodDeliv={product.method}
+                  orderAt={product.created_at}
+                  onDelete={handleDelete}
+                  // qty={product.qty}
+                  // size={product.size_id}
                 />
               ))}
+              <ModaltoCart
+                msg="Data Deleted..."
+                isOpen={isDelete}
+                onClose={() => setIsDelete(false)}
+              />
             </div>
           )}
         </div>

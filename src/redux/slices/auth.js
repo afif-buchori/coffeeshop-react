@@ -34,11 +34,40 @@ const userSlice = createSlice({
     authLogin: (prevState, action) => {
       return {
         ...prevState,
-        isLogin: true,
+        // isLogin: true,
         id: action.payload.dataUser.id,
         image: action.payload.dataUser.profile_picture,
         role: action.payload.dataUser.role_id,
         token: action.payload.token,
+      };
+    },
+    updateImage: (prevState, action) => {
+      return {
+        ...prevState,
+        data: {
+          ...prevState.data,
+          profile_picture: action.payload,
+        },
+      };
+    },
+    updateAddress: (prevState, action) => {
+      console.log(action.payload);
+      return {
+        ...prevState,
+        data: {
+          ...prevState.data,
+          address: action.payload,
+        },
+      };
+    },
+    updatePhone: (prevState, action) => {
+      console.log(action.payload);
+      return {
+        ...prevState,
+        data: {
+          ...prevState.data,
+          phone: action.payload,
+        },
       };
     },
     authLogout: () => {

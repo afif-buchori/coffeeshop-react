@@ -184,8 +184,17 @@ export class Products extends Component {
             ) : (
               <div className="ml-[5%] my-5">
                 <label htmlFor="short">Short By :</label>
-                <select onChange={this.handleShorting} name="short" id="short">
-                  <option value="" disabled selected={!shorter.order && true}>
+                <select
+                  onChange={this.handleShorting}
+                  name="short"
+                  id="short"
+                  defaultValue="default"
+                >
+                  <option
+                    value="default"
+                    disabled
+                    selected={!shorter.order && true}
+                  >
                     - - - - -
                   </option>
                   <option
