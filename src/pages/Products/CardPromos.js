@@ -14,7 +14,10 @@ function Promos(props) {
       <hr className="border border-black border-dashed w-[111%]" />
       <p className="">COUPON CODE</p>
       <h3 className="font-bold text-3xl font-popins">{props.code}</h3>
-      <h4 className="text-xs">Valid untill {props.expired || "22-10-2023"}</h4>
+      <h4 className="text-xs">
+        Valid untill{" "}
+        {new Date(props.expired).toDateString("id-ID") || "22-10-2023"}
+      </h4>
     </div>
   );
 }

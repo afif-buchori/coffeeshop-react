@@ -5,20 +5,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FFBA33',
-        secondary: '#6A4029',
-        backaccent: '#F8F8F8',
-        secondaryhover: '#895537',
-        grey: '#9F9F9F',
-        greydark: '#4F5665',
+        primary: "#FFBA33",
+        secondary: "#6A4029",
+        backaccent: "#F8F8F8",
+        secondaryhover: "#895537",
+        grey: "#9F9F9F",
+        greydark: "#4F5665",
       },
       fontFamily: {
-        popins: ['Poppins', "sans-serif"],
-      }
+        rubik: ["Rubik", "sans-serif"],
+        popins: ["Poppins", "sans-serif"],
+      },
     },
   },
-  plugins: [
-    require('tailwindcss'),
-    require('autoprefixer'),
-  ],
-}
+  plugins: [require("tailwindcss"), require("autoprefixer")],
+};
