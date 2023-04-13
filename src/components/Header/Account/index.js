@@ -3,8 +3,8 @@ import iconSearch from "../../assets/icon/search.svg";
 import iconChat from "../../assets/icon/chat.svg";
 import { Link } from "react-router-dom";
 
-import { searchContexts } from "../../utils/contexts";
-import store from "../../redux/store";
+import { searchContexts } from "../../../utils/contexts";
+import store from "../../../redux/store";
 
 export class Account extends Component {
   constructor() {
