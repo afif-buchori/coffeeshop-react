@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 // import App from "./pages/App";
 import Home from "./pages/Home";
-import Auth from "./pages/auth";
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import Login from "./pages/auth/Login";
@@ -19,7 +18,6 @@ import PublicRoute from "./utils/wrapper/publicRoute";
 const router = createBrowserRouter([
   // { path: "/", element: <App name="Afif" age={20} href={"https://reactjs.org"} /> },
   { path: "/", element: <Home /> },
-  { path: "/auth", element: <Auth /> },
   {
     path: "/login",
     element: (
