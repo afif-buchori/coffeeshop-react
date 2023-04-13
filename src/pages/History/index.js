@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import CardHistory from "./CardHistory";
+import CardHistory from "../../components/forPages/CardHistory";
 // import { useSelector } from "react-redux";
 import { getHistory } from "../../utils/https/transaction";
 import Loader from "../../components/Loader";
