@@ -11,7 +11,7 @@ import CardProducts from "../../components/products/CardProducts";
 import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
 import DataNotFound from "../../components/DataNotFound";
-import PromosSection from "./PromosSection";
+import PromosSection from "../../components/products/PromosSection";
 
 export class Products extends Component {
   constructor(props) {
