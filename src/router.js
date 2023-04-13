@@ -7,7 +7,7 @@ import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Register";
-import ProductDetails from "./pages/Products/ProductDetails";
+import ProductDetails from "./pages/ProductDetails";
 import YourCart from "./pages/YourCart";
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
