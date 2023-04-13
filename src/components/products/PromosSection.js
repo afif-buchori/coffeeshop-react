@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import CardPromos from "./CardPromos";
-import Loader from "../../components/Loader";
+import Loader from "../Loader";
 
 import { getPromos } from "../../utils/https/promos";
 

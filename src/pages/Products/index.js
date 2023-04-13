@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import withSearchParams from "../../utils/wrapper/withParams";
 import withNavigate from "../../utils/wrapper/withNavigate";
 
-import CardProducts from "./CardProducts";
+import CardProducts from "../../components/products/CardProducts";
 // import axios from "axios";
 import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
