@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import OrderProduct from "./OrderProduct";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
-import NothingCart from "./NothingCart";
+import OrderProduct from "../../components/forPages/OrderProduct";
+import NothingCart from "../../components/forPages/NothingCart";
 
 import { counterAction } from "../../redux/slices/counter";
 import ModalMsg from "../../components/ModalMgs";

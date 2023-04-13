@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import Loader from "../../components/Loader";
+import Loader from "../Loader";
 import { editPassword } from "../../utils/https/auth";
 
 function ChangePwd({ isOpen, onClose }) {

@@ -9,7 +9,7 @@ import { authLogout, getUser, updateDataUser } from "../../utils/https/auth";
 import { userAction } from "../../redux/slices/auth";
 import { counterAction } from "../../redux/slices/counter";
 import { useNavigate } from "react-router-dom";
-import ChangePwd from "./ChangePwd";
+import ChangePwd from "../../components/forPages/ChangePwd";
 
 function Profile() {
   const controller = useMemo(() => new AbortController(), []);
