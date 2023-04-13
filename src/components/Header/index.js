@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Authentication from "./Authentication/Authentication";
-import Account from "./Account/Account";
+import Authentication from "../forPages/Authentication";
+import Account from "../forPages/Account";
 
 import logoBrand from "../../assets/icon/logo.svg";
 import toggleNav from "../../assets/icon/toggle-menu.svg";
