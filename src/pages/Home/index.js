@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 import logoSearch from "../../assets/icon/search.svg";
 import imgTeamWork from "../../assets/team-work.webp";

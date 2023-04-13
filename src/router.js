@@ -3,11 +3,11 @@ import { createBrowserRouter } from "react-router-dom";
 
 // import App from "./pages/App";
 import Home from "./pages/Home";
-import Auth from "./pages/Auth";
+import Auth from "./pages/auth";
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
 import ProductDetails from "./pages/Products/ProductDetails";
 import YourCart from "./pages/YourCart";
 import History from "./pages/History";
