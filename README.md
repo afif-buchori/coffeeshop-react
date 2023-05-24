@@ -51,10 +51,10 @@ If you would like to contribute to this project, please send a pull request to t
 ## Documentation
 
 <div align="center">
-  <img width="600" src="./src/screencapture/home-page.png" alt="display-documentation">
-  <img width="600" src="./src/screencapture/login-page.png" alt="display-documentation">
-  <img width="600" src="./src/screencapture/products-page.png" alt="display-documentation">
-  <img width="600" src="./src/screencapture/cart-page.png" alt="display-documentation">
-  <img width="600" src="./src/screencapture/history-page.png" alt="display-documentation">
-  <img width="600" src="./src/screencapture/profile-page.png" alt="display-documentation">
+  <img width="600" src="./src/assets/screencapture/home-page.png" alt="display-documentation">
+  <img width="600" src="./src/assets/screencapture/login-page.png" alt="display-documentation">
+  <img width="600" src="./src/assets/screencapture/products-page.png" alt="display-documentation">
+  <img width="600" src="./src/assets/screencapture/cart-page.png" alt="display-documentation">
+  <img width="600" src="./src/assets/screencapture/history-page.png" alt="display-documentation">
+  <img width="600" src="./src/assets/screencapture/profile-page.png" alt="display-documentation">
 </div>
