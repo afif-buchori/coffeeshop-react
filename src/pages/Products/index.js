@@ -12,6 +12,7 @@ import { getProducts } from "../../utils/https/products";
 import Loader from "../../components/Loader";
 import DataNotFound from "../../components/DataNotFound";
 import PromosSection from "../../components/products/PromosSection";
+import BtnCreateNew from "../../components/products/BtnCreateNew";
 
 export class Products extends Component {
   constructor(props) {
@@ -264,6 +265,7 @@ export class Products extends Component {
                 </button>
               </div>
             )}
+            <BtnCreateNew />
           </div>
 
           {/* <!-- PROMO SIDE --> */}

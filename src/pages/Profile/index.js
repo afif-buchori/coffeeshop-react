@@ -79,14 +79,14 @@ function Profile() {
       const result = await authLogout(controller);
       if (result.status === 200) {
         console.log(result);
-        dispatch(userAction.authLogout());
-        dispatch(counterAction.resetCounter());
         setIsLoading(false);
         navigate("/", { replace: true });
       }
     } catch (error) {
       console.log(error);
     }
+    dispatch(userAction.authLogout());
+    dispatch(counterAction.resetCounter());
   };
 
   const handleEditPwd = () => {
