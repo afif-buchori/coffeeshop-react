@@ -40,16 +40,54 @@ Coffee Shop has several main features:
 
 ## How to run the application
 
-To run the application, follow these steps:
+## How to Run the Application
 
-1. Clone this repository to your computer.
-2. Open a terminal in the repository directory and run the `npm install` command to install all required dependencies.
-3. After it finishes, run the `npm start` command to run the application.
-4. Open a browser and visit `http://localhost:3000` to see the application.
+### 1. Clone this repository
+
+Clone this repository by run the following code:
+
+```
+$ git clone https://github.com/afif-buchori/coffeeshop-react.git
+```
+
+### 2. Install dependency packages
+
+Install dependency packages by run the following code inside project folder:
+
+```
+$ npm install
+```
+
+### 3. Configure .env file
+
+Configure .env file by create file named .env inside project folder and add this line to the file:
+
+```
+REACT_APP_SERVER_HOST = https://example.com
+
+```
+
+### 4. Run projects
+
+Run this projects by run the following code:
+
+```
+$ npm start
+```
+
+It runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
 ## Contributions
 
 If you would like to contribute to this project, please send a pull request to this repository. We greatly appreciate your contributions.
+
+## Deployment
+
+Project Link : [Click Here](https://coffeeshop-react.vercel.app/)
 
 ## Documentation
 
@@ -68,3 +106,12 @@ If you would like to contribute to this project, please send a pull request to t
 [Coffee-Shop Backend] (https://github.com/afif-buchori/coffee-shop)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Tailwind-CSS]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[Redux]: https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: https://redux.js.org/
