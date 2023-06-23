@@ -18,11 +18,14 @@ Coffee Shop is a web-based application for order coffee, non coffee, and foods p
 
 ## Build With
 
-This application is built using React.js, Redux, axios, TailwindCSS.
+- [![React][React.js]][React-url]
+- [![Tailwind][Tailwind-CSS]][Tailwind-url]
+- [![Redux][Redux]][Redux-url]
+<!-- This application is built using React.js, Redux, axios, TailwindCSS.
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=react,javascript,html,css,redux,tailwind,vercel" />
-</div>
+</div> -->
 
 ## Features
 
@@ -51,10 +54,17 @@ If you would like to contribute to this project, please send a pull request to t
 ## Documentation
 
 <div align="center">
-  <img width="600" src="./src/assets/screencapture/home-page.png" alt="display-documentation">
-  <img width="600" src="./src/assets/screencapture/login-page.png" alt="display-documentation">
-  <img width="600" src="./src/assets/screencapture/products-page.png" alt="display-documentation">
-  <img width="600" src="./src/assets/screencapture/cart-page.png" alt="display-documentation">
-  <img width="600" src="./src/assets/screencapture/history-page.png" alt="display-documentation">
-  <img width="600" src="./src/assets/screencapture/profile-page.png" alt="display-documentation">
+  <img width="400" src="./src/assets/screencapture/home-page.png" alt="display-documentation">
+  <img width="400" src="./src/assets/screencapture/login-page.png" alt="display-documentation">
+  <img width="400" src="./src/assets/screencapture/products-page.png" alt="display-documentation">
+  <img width="400" src="./src/assets/screencapture/cart-page.png" alt="display-documentation">
+  <img width="400" src="./src/assets/screencapture/history-page.png" alt="display-documentation">
+  <img width="400" src="./src/assets/screencapture/profile-page.png" alt="display-documentation">
 </div>
+
+## Relate Projects
+
+[Coffee-Shop Mobile] (https://github.com/afif-buchori/coffee-andro)
+[Coffee-Shop Backend] (https://github.com/afif-buchori/coffee-shop)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
