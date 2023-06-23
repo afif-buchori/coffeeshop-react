@@ -12,9 +12,9 @@
   </p>
 </div>
 
-## Coffee Shop
+## About The Project
 
-Coffee Shop is a web-based application for order coffee, non coffee, and foods product.
+The Coffee Shop Web Application is a user-friendly platform that offers a range of features for an enhanced coffee shopping experience. With functionalities such as user registration and login, password recovery, and a comprehensive product catalog, users can easily navigate the application. Additionally, the search feature enables users to find their desired coffee products effortlessly by entering specific keywords or product names. Whether it's exploring various coffee categories or quickly locating favorite blends, the Coffee Shop Web Application provides convenience and accessibility for all coffee enthusiasts.
 
 ## Build With
 
@@ -37,8 +37,6 @@ Coffee Shop has several main features:
 - Order product
 - Transaction history
 - Edit profile
-
-## How to run the application
 
 ## How to Run the Application
 
@@ -102,7 +100,7 @@ Project Link : [Click Here](https://coffeeshop-react.vercel.app/)
 
 ## Relate Projects
 
-[Coffee-Shop Mobile] (https://github.com/afif-buchori/coffee-andro)
+[Coffee-Shop Mobile] (https://github.com/afif-buchori/coffee-andro) <br />
 [Coffee-Shop Backend] (https://github.com/afif-buchori/coffee-shop)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
